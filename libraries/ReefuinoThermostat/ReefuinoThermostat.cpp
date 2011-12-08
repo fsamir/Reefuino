@@ -1,7 +1,6 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
-#include "Buzzer.h"
 
 
 double tempFactor = 0.5;
@@ -17,10 +16,8 @@ ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
 }
 
 
-double ReefuinoThermostat::verify(){
+double ReefuinoThermostat::checkTemperature(){
   double temp = _temperatureSensor.ReadCelsius();       // read ADC and  convert it to Celsius
-   Serial.print(temp,1); 
-   Serial.println(""); 
 
   if(temp >= (_tempToKeep + tempFactor)){
         _chillerRelay.on();

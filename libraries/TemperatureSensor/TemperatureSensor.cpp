@@ -9,7 +9,6 @@ TemperatureSensor::TemperatureSensor(byte SensorPin){
 TemperatureSensor::~TemperatureSensor(){/*nothing to destruct*/
 }
 
-//turn the LED on
 double TemperatureSensor::ReadCelsius(){
   _Compute(analogRead(_SensorPin));
 }

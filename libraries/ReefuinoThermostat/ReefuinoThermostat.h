@@ -5,11 +5,12 @@
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
+
 class ReefuinoThermostat {
 public:
   ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep);
   ~ReefuinoThermostat();
-  double verify();
+  double checkTemperature();
   bool isHeating();
   bool isChilling();
 
