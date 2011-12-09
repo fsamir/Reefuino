@@ -1,6 +1,11 @@
 #ifndef Reefuino_H_
 #define Reefuino_H_
-#include "WProgram.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
 
 
 //end of add your includes here

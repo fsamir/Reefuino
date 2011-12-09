@@ -1,17 +1,20 @@
 #ifndef TemperatureSensor_H
 #define TemperatureSensor_H
-
-#include <WProgram.h>
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
 
 class TemperatureSensor {
 public:
-  TemperatureSensor(byte sensorPin);
+  TemperatureSensor(int sensorPin);
   ~TemperatureSensor();
   double ReadCelsius();
 
 
 private:
-  byte _SensorPin;
+  int _SensorPin;
   double _Compute(int RawADC);
 };
 

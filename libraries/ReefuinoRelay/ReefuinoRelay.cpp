@@ -2,7 +2,7 @@
 #undef double
 
 
-ReefuinoRelay::ReefuinoRelay(byte sensorPin):_sensorPin(sensorPin) {
+ReefuinoRelay::ReefuinoRelay(int sensorPin):_sensorPin(sensorPin) {
   pinMode(sensorPin, OUTPUT);
   isActive = false; 
 }

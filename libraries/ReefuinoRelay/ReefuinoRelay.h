@@ -1,11 +1,14 @@
 #ifndef ReefuinoRelay_H
 #define ReefuinoRelay_H
-
-#include <WProgram.h>
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
 
 class ReefuinoRelay {
 public:
-  ReefuinoRelay(byte sensorPin);
+  ReefuinoRelay(int sensorPin);
   ~ReefuinoRelay();
   void on();
   void off();
@@ -14,7 +17,7 @@ public:
 
 private:
   int _sensorPin;
-  boolean isActive;
+  bool isActive;
 };
 
 #endif

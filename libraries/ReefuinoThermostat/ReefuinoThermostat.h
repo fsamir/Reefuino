@@ -1,7 +1,12 @@
 #ifndef ReefuinoThermostat_H
 #define ReefuinoThermostat_H
 
-#include <WProgram.h>
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
@@ -11,6 +16,7 @@ public:
   ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep);
   ~ReefuinoThermostat();
   double checkTemperature();
+  bool isHarmfulTemperature();
   bool isHeating();
   bool isChilling();
 

@@ -2,10 +2,20 @@
 #include <TemperatureSensor.h>
 #include <ReefuinoRelay.h>
 #include <ReefuinoThermostat.h>
+#include <Buzzer.h>
+#include <Logger.h>
+#include<stdlib.h>
+
+
+
 
 #define ThermistorPIN 0   // Analog Pin 0
-#define RelayChillerPIN 8 
-#define RelayHeaterPIN 9
+#define RelayChillerPIN 9 
+#define RelayHeaterPIN 8
+#define BuzzerPin 11 
+
+#define TempToKeep 24.0
+
 
 double temperatureToKeep = 24.0;
 
@@ -14,24 +24,28 @@ ReefuinoRelay chillerRelay(RelayChillerPIN);
 ReefuinoRelay heaterRelay(RelayHeaterPIN);
 ReefuinoThermostat thermostat(temperatureSensor, chillerRelay, heaterRelay, temperatureToKeep);
 
+Buzzer buzzer(BuzzerPin);
+Logger logger(115200);
+
 void setup() {
-  Serial.begin(115200);  
-  
-  Serial.print("Temperature is set to: ");   
-    Serial.println(temperatureToKeep, DEC);   
+
 }
 
 void loop() {
   double temp = thermostat.checkTemperature(); 
-  
+
+  char msg[10] = "Temp: ";
+  dtostrf(temp, 2, 2, msg);
+  logger.debug(msg);
+
   if(thermostat.isHeating()){
-    Serial.println("Heater is on");    
-  } else if(thermostat.isChilling()){
-    Serial.println("Chiller is on");    
-  } else {
-    Serial.println("Temperature control is taking a nap");    
+
   }
-  delay(1000); 
+
+  if(thermostat.isHarmfulTemperature()){
+    //    buzzer.bip();
+  }
+  delay(1000);                                      // Delay a bit... 
 }
 
 

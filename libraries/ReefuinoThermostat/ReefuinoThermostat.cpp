@@ -3,7 +3,8 @@
 #include "ReefuinoRelay.h"
 
 
-double tempFactor = 0.5;
+double actionBuffer = 0.5;
+double harmfullFactor = 1.5;
 
 bool isOn = false;
 
@@ -15,24 +16,31 @@ ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chill
 ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
 }
 
-
 double ReefuinoThermostat::checkTemperature(){
   double temp = _temperatureSensor.ReadCelsius();       // read ADC and  convert it to Celsius
-
-  if(temp >= (_tempToKeep + tempFactor)){
+  if(temp >= (_tempToKeep + actionBuffer)){
         _chillerRelay.on();
   }
   if(temp <= _tempToKeep) {
     	_chillerRelay.off();		
   }
-  if(temp < (_tempToKeep - tempFactor)) {
+  if(temp < (_tempToKeep - actionBuffer)) {
     	_heaterRelay.on();
   }
   if(temp >= _tempToKeep){
     	_heaterRelay.off();
   }
-
   return temp;
+}
+
+/*Is the temperature dangerously high or low? */
+bool ReefuinoThermostat::isHarmfulTemperature() {
+	double temp = _temperatureSensor.ReadCelsius();
+	if(temp >= _tempToKeep + harmfullFactor	|| temp <= _tempToKeep - harmfullFactor){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 bool ReefuinoThermostat::isHeating() {

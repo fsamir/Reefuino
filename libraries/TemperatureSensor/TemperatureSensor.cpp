@@ -1,7 +1,7 @@
 #include "TemperatureSensor.h" 
 
 
-TemperatureSensor::TemperatureSensor(byte SensorPin){
+TemperatureSensor::TemperatureSensor(int SensorPin){
   _SensorPin = SensorPin;
 }
 
