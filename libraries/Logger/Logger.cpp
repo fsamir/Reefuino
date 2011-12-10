@@ -1,12 +1,16 @@
 #include "Logger.h"
 
-Logger::Logger(int serialPort){
-	Serial.begin(serialPort);
+Logger::Logger(){
 
 }
 
 //<<destructor>>
 Logger::~Logger(){/*nothing to destruct*/
+}
+
+void Logger::init(int serialPort) {
+	Serial.begin(serialPort);
+	Serial.println("Started serial port: "+String(serialPort));
 }
 
 void Logger::debug(String msg) {

@@ -1,20 +1,21 @@
 #include "TemperatureSensor.h" 
 
+//Reference: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1260958614
 
 TemperatureSensor::TemperatureSensor(int SensorPin){
-  _SensorPin = SensorPin;
+  _sensorPin = SensorPin;
 }
 
 //<<destructor>>
 TemperatureSensor::~TemperatureSensor(){/*nothing to destruct*/
 }
 
-double TemperatureSensor::ReadCelsius(){
-  _Compute(analogRead(_SensorPin));
+double TemperatureSensor::readCelsius(){
+  _compute(analogRead(_sensorPin));
 }
 
 
-double TemperatureSensor::_Compute(int RawADC) {
+double TemperatureSensor::_compute(int RawADC) {
   double Temp;
 
   Temp = log(((10240000/RawADC) - 10000));

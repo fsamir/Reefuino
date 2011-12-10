@@ -1,23 +1,29 @@
-#include "Logger.h"
+#include "ATO.h"
 
-Logger::Logger(int serialPort){
-	Serial.begin(serialPort);
-
+//Schematics: http://www.arduino.cc/en/Tutorial/Button
+ATO::ATO(int pin, ReefuinoRelay relay):atoPin(pin), pumpRelay(relay){
+	  pinMode(atoPin, INPUT);
+	  Serial.println("Startd ATO on pin: "+ atoPin);
 }
 
 //<<destructor>>
-Logger::~Logger(){/*nothing to destruct*/
+ATO::~ATO(){/*nothing to destruct*/
 }
 
-void Logger::debug(String msg) {
-	Serial.println("[DEBUG] " + msg);
+bool ATO::onLoop() {
+	int value = digitalRead(atoPin);
+	if(value == HIGH) {
+		pumpRelay.on();
+	}else{
+		pumpRelay.off();
+	}
+
+	return value;
 }
 
-void Logger::error(String msg){
-	Serial.println("[ERROR] " + msg);
+bool ATO::isTopping() {
+	return pumpRelay.isOn();
 }
-
-
 
 
 

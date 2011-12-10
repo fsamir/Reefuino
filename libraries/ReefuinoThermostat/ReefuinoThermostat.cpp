@@ -17,7 +17,7 @@ ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
 }
 
 double ReefuinoThermostat::checkTemperature(){
-  double temp = _temperatureSensor.ReadCelsius();       // read ADC and  convert it to Celsius
+  double temp = _temperatureSensor.readCelsius();       // read ADC and  convert it to Celsius
   if(temp >= (_tempToKeep + actionBuffer)){
         _chillerRelay.on();
   }
@@ -35,7 +35,7 @@ double ReefuinoThermostat::checkTemperature(){
 
 /*Is the temperature dangerously high or low? */
 bool ReefuinoThermostat::isHarmfulTemperature() {
-	double temp = _temperatureSensor.ReadCelsius();
+	double temp = _temperatureSensor.readCelsius();
 	if(temp >= _tempToKeep + harmfullFactor	|| temp <= _tempToKeep - harmfullFactor){
 		return true;
 	}else{

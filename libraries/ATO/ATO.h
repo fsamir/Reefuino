@@ -7,15 +7,18 @@
   #include "WProgram.h"
 #endif
 
+#include "ReefuinoRelay.h"
+
 class ATO {
 public:
-  ATO(int highPin, int lowPin);
+  ATO(int pin, ReefuinoRelay relay);
   ~ATO();
-  bool isActive();
+  bool onLoop();
+  bool isTopping();
 
 private:
-  int lowPin;
-  int highPin;
+  int atoPin;
+  ReefuinoRelay pumpRelay;
 };
 
 #endif

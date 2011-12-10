@@ -1,22 +1,31 @@
-#include <math.h>
 #include <ATO.h>
 #include <Logger.h>
-#include<stdlib.h>
+#include <ATO.h>
+#include <ReefuinoRelay.h>
 
-#define HighPin 2   // Analog Pin 0
-#define LowPin 3 
+#define ATOPin 12 
+#define ATOPumpPin 9 
 
-Logger logger(115200);
+Logger logger();
+ReefuinoRelay atoPumpRelay(ATOPumpPin);
+ATO ato(ATOPin, atoPumpRelay);
 
 void setup() {
+  Serial.begin(115200);
+  //logger.init(115200);
 }
 
 void loop() {
-  int low = digitalRead(LowPin);
-  logger.debug("Low: "+ low);
-  int high = digitalRead(HighPin);
-  delay(1000);                                      // Delay a bit... 
+  int value = ato.onLoop();
+  Serial.println("ATO: "+String(value));
+  
+  Serial.println("is Topping: "+String(ato.isTopping()));
+  
+
+  delay(1000);
 }
+
+
 
 
 

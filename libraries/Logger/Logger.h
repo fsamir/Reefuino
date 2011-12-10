@@ -9,14 +9,15 @@
 
 class Logger {
 public:
-  Logger(int serialPort);
+  Logger();
   ~Logger();
   void debug(String msg);
   void error(String msg);
+  void init(int serialPort);
 
 
 private:
-
+  int serialPort;
 };
 
 #endif

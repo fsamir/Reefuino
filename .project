@@ -83,6 +83,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Buzzer</name>
+			<type>2</type>
+			<locationURI>ReefuinoBuzzer/Buzzer</locationURI>
+		</link>
+		<link>
 			<name>TemperatureSensor</name>
 			<type>2</type>
 			<locationURI>ReefuinoTemperatureSensor/TemperatureSensor</locationURI>
