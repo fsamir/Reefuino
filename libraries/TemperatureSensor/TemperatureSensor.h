@@ -16,7 +16,7 @@ public:
 
 private:
   int _sensorPin;
-  double _compute(int RawADC);
+  float _compute(int RawADC);
 };
 
 #endif

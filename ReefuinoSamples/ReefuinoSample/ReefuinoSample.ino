@@ -8,20 +8,18 @@
 #include<stdlib.h>
 
 
-
-
-#define Temp1Pin 0   // Analog Pin 
+#define WaterTemperatureSensorPin 0   // Analog Pin 
 #define Temp2Pin 1   // Analog Pin 
-#define RelayChillerPIN 9 
-#define RelayHeaterPIN 8
-#define BuzzerPin 11 
+#define RelayChillerPIN 9 //digital
+#define RelayHeaterPIN 8 //digital
+#define BuzzerPin 11 //digital
 
-#define ATOPin 12 
-#define ATOPumpPin 10
+#define ATOPin 12 //digital
+#define ATOPumpPin 10 //digital
 
-//Temperature control
-double temperatureToKeep = 24.0;
-TemperatureSensor waterTemperatureSensor(Temp1Pin);
+//Water Temperature control
+double temperatureToKeep = 26.0;
+TemperatureSensor waterTemperatureSensor(WaterTemperatureSensorPin);
 ReefuinoRelay chillerRelay(RelayChillerPIN);
 ReefuinoRelay heaterRelay(RelayHeaterPIN);
 ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep);
@@ -47,19 +45,32 @@ void loop() {
   double temp = thermostat.checkTemperature(); 
   double standTemp = standTemperatureSensor.readCelsius();
 
-  char msg[10] = "Temp: ";
+  char msg[12] = "Water: ";
   dtostrf(temp, 2, 2, msg);
+
+  char standMsg[12] = "Stand: ";
+  dtostrf(standTemp, 2, 2, standMsg);
+
   logger.debug(msg);
+  logger.debug(standMsg);
 
   if(thermostat.isHeating()){
 
   }
 
   if(thermostat.isHarmfulTemperature()){
-    //    buzzer.bip();
+    buzzer.bip();
+    if(temp > temperatureToKeep){
+      logger.debug("High temperature alert.");
+    } 
+    else{
+      logger.debug("Low temperature alert.");
+    }
   }
-  delay(1000);                                      // Delay a bit... 
+  delay(3 * 1000); 
 }
+
+
 
 
 

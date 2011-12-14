@@ -21,8 +21,6 @@ Buzzer::~Buzzer(){/*nothing to destruct*/
 }
 
 void Buzzer::bip() {
-	Serial.println("Bip sensor:"+ String(buzzerPin));
-	
 	for (long i = 0; i < 512 ; i++ ) {
 		digitalWrite(buzzerPin, HIGH);
 		delayMicroseconds(44);
