@@ -1,35 +1,29 @@
 #include "ReefuinoRelay.h" 
 #undef double
 
+#include "Chronodot.h"
 
-ReefuinoRelay::ReefuinoRelay(int sensorPin):_sensorPin(sensorPin) {
-  pinMode(sensorPin, OUTPUT);
-  isActive = false; 
-}
+Chronodot RTC;
 
 //<<destructor>>
 ReefuinoRelay::~ReefuinoRelay(){/*nothing to destruct*/
 }
 
-void ReefuinoRelay::on(){
-  digitalWrite(_sensorPin, HIGH);     
-  Serial.println("Relay " + String(_sensorPin) + " is on.");
-  isActive = true;
+void ReefuinoRelay::on() {
+	Relay::on();
+	Serial.println("Relay " + String(_sensorPin) + " is on.");
 }
 
-void ReefuinoRelay::off(){
-  digitalWrite(_sensorPin, LOW);
-  Serial.println("Relay " + String(_sensorPin) + " is off.");    
-  isActive = false;
+void ReefuinoRelay::off() {
+	Relay::off();
+	Serial.println("Relay " + String(_sensorPin) + " is off.");
 }
 
-bool ReefuinoRelay::isOff(){
-	return !isActive;
+bool ReefuinoRelay::isOff() {
+	return Relay::isOff();
 }
 
-bool ReefuinoRelay::isOn(){
-	return isActive;
+bool ReefuinoRelay::isOn() {
+	return Relay::isOn();
 }
-
-
 

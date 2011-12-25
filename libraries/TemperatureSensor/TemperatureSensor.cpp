@@ -25,34 +25,19 @@ double TemperatureSensor::readCelsius(){
 }
 
 float TemperatureSensor::_compute(int RawADC) {
-//float Temperature(int AnalogInputNumber,int OutputUnit,float B,float T0,float R0,float R_Balance){
+  double Temp;
 
-  float B = EPISCO_K164_10k;
-  float T0 = 10000.0f;
+  Temp = log(((10240000/RawADC) - 10000));
+  // Assuming a 10k Thermistor.
+  //Calculation is actually: Resistance = (1024 * BalanceResistor/ADC) - BalanceResistor
 
-  float R,T;
+  Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp));
+  Temp = Temp - 273.15;            // Convert Kelvin to Celcius
 
-  R=1024.0f*R_Balance/float(RawADC))-R_Balance;
-  T=1.0f/(1.0f/T0+(1.0f/B)*log(R/R0));
+  //in case you need farenheit:
+  // Temp = (Temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
 
-  T-=273.15f;
-
-  return T;
+  return Temp;
 }
-//double TemperatureSensor::_compute(int RawADC) {
-//  double Temp;
-//
-//  Temp = log(((10240000/RawADC) - 10000));
-//  // Assuming a 10k Thermistor.
-//  //Calculation is actually: Resistance = (1024 * BalanceResistor/ADC) - BalanceResistor
-//
-//  Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp));
-//  Temp = Temp - 273.15;            // Convert Kelvin to Celcius
-//
-//  //in case you need farenheit:
-//  // Temp = (Temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
-//
-//  return Temp;
-//}
 
 

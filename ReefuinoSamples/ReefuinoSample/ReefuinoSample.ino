@@ -1,6 +1,7 @@
 #include <math.h>
 #include <TemperatureSensor.h>
 #include <ReefuinoRelay.h>
+#include <Relay.h>
 #include <ReefuinoThermostat.h>
 #include <Buzzer.h>
 #include <Logger.h>
@@ -39,6 +40,16 @@ void setup() {
   Serial.begin(115200);
   //  logger.init(115200); //TODO: Investigate why this isn't working
   logger.debug("Reefuino Setup.");
+
+  Serial.println("Initializing Chronodot.");
+  Wire.begin();
+  RTC.begin();
+
+  if (! RTC.isrunning()) {
+    Serial.println("RTC is NOT running!");
+    // following line sets the RTC to the date & time this sketch was compiled
+    RTC.adjust(DateTime(__DATE__, __TIME__));
+  }
 }
 
 void loop() {
@@ -69,6 +80,7 @@ void loop() {
   }
   delay(3 * 1000); 
 }
+
 
 
 

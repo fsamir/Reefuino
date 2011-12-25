@@ -6,9 +6,11 @@
   #include "WProgram.h"
 #endif
 
-class ReefuinoRelay {
+#include <Relay.h>
+
+class ReefuinoRelay : public Relay {
 public:
-  ReefuinoRelay(int sensorPin);
+  ReefuinoRelay(int sensorPin): Relay(sensorPin){ }
   ~ReefuinoRelay();
   void on();
   void off();
@@ -16,8 +18,7 @@ public:
   bool isOff();
 
 private:
-  int _sensorPin;
-  bool isActive;
+
 };
 
 #endif
