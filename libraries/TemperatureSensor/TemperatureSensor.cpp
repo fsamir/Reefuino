@@ -3,41 +3,57 @@
 //Reference: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1260958614
 /*
  (Ground) --- (10k-Resistor) ----|---- (Thermistor) --- (+5v)
-                                 |
-                            Analog Pin ?
-*/
+ |
+ Analog Pin ?
+ */
 
-// manufacturer data for episco k164 10k thermistor
-// simply delete this if you don't need it
-// or use this idea to define your own thermistors
-#define EPISCO_K164_10k 4300.0f,298.15f,10000.0f  // B,T0,R0
+#define ThermistorPIN 0                 // Analog Pin 0
+float vcc = 4.91; // only used for display purposes, if used
+// set to the measured Vcc.
+float pad = 9850; // balance/pad resistor value, set this to
+// the measured resistance of your pad resistor
+float thermr = 10000; // thermistor nominal resistance
 
-TemperatureSensor::TemperatureSensor(int SensorPin){
-  _sensorPin = SensorPin;
+TemperatureSensor::TemperatureSensor(int SensorPin) {
+	_sensorPin = SensorPin;
 }
 
 //<<destructor>>
-TemperatureSensor::~TemperatureSensor(){/*nothing to destruct*/
+TemperatureSensor::~TemperatureSensor() {/*nothing to destruct*/
 }
 
-double TemperatureSensor::readCelsius(){
-  _compute(analogRead(_sensorPin));
+double TemperatureSensor::readCelsius() {
+	_compute(analogRead(_sensorPin));
 }
 
 float TemperatureSensor::_compute(int RawADC) {
-  double Temp;
+	long Resistance;
+	float Temp; // Dual-Purpose variable to save space.
 
-  Temp = log(((10240000/RawADC) - 10000));
-  // Assuming a 10k Thermistor.
-  //Calculation is actually: Resistance = (1024 * BalanceResistor/ADC) - BalanceResistor
+	Resistance = ((1024 * pad / RawADC) - pad);
+	Temp = log(Resistance); // Saving the Log(resistance) so not to calculate  it 4 times later
+	Temp = 1
+			/ (0.001129148 + (0.000234125 * Temp)
+					+ (0.0000000876741 * Temp * Temp * Temp));
+	Temp = Temp - 273.15; // Convert Kelvin to Celsius
 
-  Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp));
-  Temp = Temp - 273.15;            // Convert Kelvin to Celcius
+	// BEGIN- Remove these lines for the function not to display anything
+	Serial.print("ADC: ");
+	Serial.print(RawADC);
+	Serial.print("/1024"); // Print out RAW ADC Number
+	Serial.print(", vcc: ");
+	Serial.print(vcc, 2);
+	Serial.print(", pad: ");
+	Serial.print(pad / 1000, 3);
+	Serial.print(" Kohms, Volts: ");
+	Serial.print(((RawADC * vcc) / 1024.0), 3);
+	Serial.print(", Resistance: ");
+	Serial.print(Resistance);
+	Serial.print(" ohms, ");
+	// END- Remove these lines for the function not to display anything
 
-  //in case you need farenheit:
-  // Temp = (Temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
-
-  return Temp;
+	// Uncomment this line for the function to return Fahrenheit instead.
+	//temp = (Temp * 9.0)/ 5.0 + 32.0;                  // Convert to Fahrenheit
+	return Temp;
 }
-
 

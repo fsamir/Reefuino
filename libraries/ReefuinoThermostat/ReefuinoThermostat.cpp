@@ -16,8 +16,8 @@ ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chill
 ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
 }
 
-double ReefuinoThermostat::checkTemperature(){
-  double temp = _temperatureSensor.readCelsius();       // read ADC and  convert it to Celsius
+float ReefuinoThermostat::checkTemperature(){
+  float temp = _temperatureSensor.readCelsius();       // read ADC and  convert it to Celsius
   if(temp >= (_tempToKeep + actionBuffer)){
         _chillerRelay.on();
   }

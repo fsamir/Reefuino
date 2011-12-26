@@ -1,5 +1,8 @@
 #include <math.h>
+#include <Wire.h>
 #include <TemperatureSensor.h>
+#include <Relay.h>
+#include <Chronodot.h>
 #include <ReefuinoRelay.h>
 #include <ReefuinoThermostat.h>
 
@@ -22,7 +25,10 @@ void setup() {
 }
 
 void loop() {
-  double temp = thermostat.checkTemperature(); 
+  float temp = thermostat.checkTemperature(); 
+  
+  Serial.print("Celsius: "); 
+  Serial.print(temp,1);
   
   if(thermostat.isHeating()){
     Serial.println("Heater is on");    

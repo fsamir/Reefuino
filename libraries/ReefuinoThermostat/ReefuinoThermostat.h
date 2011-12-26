@@ -15,7 +15,7 @@ class ReefuinoThermostat {
 public:
   ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep);
   ~ReefuinoThermostat();
-  double checkTemperature();
+  float checkTemperature();
   bool isHarmfulTemperature();
   bool isHeating();
   bool isChilling();
