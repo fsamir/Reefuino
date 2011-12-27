@@ -28,7 +28,7 @@ void loop() {
   float temp = thermostat.checkTemperature(); 
   
   Serial.print("Celsius: "); 
-  Serial.print(temp,1);
+  Serial.println(temp,1);
   
   if(thermostat.isHeating()){
     Serial.println("Heater is on");    

@@ -12,7 +12,7 @@ class TemperatureSensor {
 public:
   TemperatureSensor(int sensorPin);
   ~TemperatureSensor();
-  double readCelsius();
+  float readCelsius();
 
 
 private:
