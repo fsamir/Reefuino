@@ -12,6 +12,8 @@
 
 double temperatureToKeep = 24.0;
 
+TemperatureSensor secondary(1);
+
 TemperatureSensor temperatureSensor(ThermistorPIN);
 ReefuinoRelay chillerRelay(RelayChillerPIN);
 ReefuinoRelay heaterRelay(RelayHeaterPIN);
@@ -26,18 +28,27 @@ void setup() {
 
 void loop() {
   float temp = thermostat.checkTemperature(); 
-  
   Serial.print("Celsius: "); 
   Serial.println(temp,1);
+<<<<<<< HEAD
+=======
   
-  if(thermostat.isHeating()){
-    Serial.println("Heater is on");    
-  } else if(thermostat.isChilling()){
-    Serial.println("Chiller is on");    
-  } else {
-    Serial.println("Temperature control is taking a nap");    
-  }
-  delay(1000); 
+  float temp2 = secondary.readCelsius();
+   Serial.println("");
+  Serial.print("temp 2: "); 
+  Serial.println(temp2,1);
+  
+  
+>>>>>>> improved README
+  
+//  if(thermostat.isHeating()){
+//    Serial.println("Heater is on");    
+//  } else if(thermostat.isChilling()){
+//    Serial.println("Chiller is on");    
+//  } else {
+//    Serial.println("Temperature control is taking a nap");    
+//  }
+  delay(1000 * 5); 
 }
 
 
