@@ -12,8 +12,8 @@ class ReefuinoRelay : public Relay {
 public:
   ReefuinoRelay(int sensorPin): Relay(sensorPin){ }
   ~ReefuinoRelay();
-  void on();
-  void off();
+  void turnOn();
+  void turnOff();
   bool isOn();
   bool isOff();
 

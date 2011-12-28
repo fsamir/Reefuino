@@ -2,11 +2,14 @@
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
 
-
 double actionBuffer = 0.5;
 double harmfullFactor = 1.5;
 
 bool isOn = false;
+
+//ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep, Chronodot rtc)
+// :_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(heaterRelay), clock(rtc) {
+//}
 
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep)
  :_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(heaterRelay) {
@@ -19,16 +22,17 @@ ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
 float ReefuinoThermostat::checkTemperature(){
   float temp = _temperatureSensor.readCelsius();       // read ADC and  convert it to Celsius
   if(temp >= (_tempToKeep + actionBuffer)){
-        _chillerRelay.on();
+        _chillerRelay.turnOn();
+//        lastTimeChillerOn = clock.now();
   }
   if(temp <= _tempToKeep) {
-    	_chillerRelay.off();		
+    	_chillerRelay.turnOff();		
   }
   if(temp < (_tempToKeep - actionBuffer)) {
-    	_heaterRelay.on();
+    	_heaterRelay.turnOn();
   }
   if(temp >= _tempToKeep){
-    	_heaterRelay.off();
+    	_heaterRelay.turnOff();
   }
   return temp;
 }

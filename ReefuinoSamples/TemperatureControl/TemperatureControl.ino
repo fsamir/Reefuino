@@ -1,8 +1,8 @@
 #include <math.h>
 #include <Wire.h>
+#include <Chronodot.h>
 #include <TemperatureSensor.h>
 #include <Relay.h>
-#include <Chronodot.h>
 #include <ReefuinoRelay.h>
 #include <ReefuinoThermostat.h>
 
@@ -10,7 +10,7 @@
 #define RelayChillerPIN 9 
 #define RelayHeaterPIN 8
 
-double temperatureToKeep = 24.0;
+double temperatureToKeep = 26.0;
 
 TemperatureSensor temperatureSensor(ThermistorPIN);
 ReefuinoRelay chillerRelay(RelayChillerPIN);

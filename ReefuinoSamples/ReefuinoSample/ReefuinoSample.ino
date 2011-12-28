@@ -1,40 +1,47 @@
 #include <math.h>
+#include <Chronodot.h>
 #include <TemperatureSensor.h>
 #include <ReefuinoRelay.h>
 #include <Relay.h>
+#include <Wire.h>
 #include <ReefuinoThermostat.h>
 #include <Buzzer.h>
 #include <Logger.h>
 #include <ATO.h>
 #include<stdlib.h>
 
+//class Chronodot;
+//class DateTime;
 
-#define WaterTemperatureSensorPin 0   // Analog Pin 
-#define Temp2Pin 1   // Analog Pin 
-#define RelayChillerPIN 9 //digital
-#define RelayHeaterPIN 8 //digital
-#define BuzzerPin 11 //digital
+#define WATER_TEMP_SENSOR_PIN 0   // Analog Pin 
+#define STAND_TEMP_SENSOR_PIN 1   // Analog Pin 
+#define RELAY_CHILLER_PIN 9 //digital
+#define RELAY_HEATER_PIN 8 //digital
+#define BUZZER_PIN 11 //digital
 
 #define ATOPin 12 //digital
 #define ATOPumpPin 10 //digital
 
 //Water Temperature control
 double temperatureToKeep = 26.0;
-TemperatureSensor waterTemperatureSensor(WaterTemperatureSensorPin);
-ReefuinoRelay chillerRelay(RelayChillerPIN);
-ReefuinoRelay heaterRelay(RelayHeaterPIN);
+TemperatureSensor waterTemperatureSensor(WATER_TEMP_SENSOR_PIN);
+ReefuinoRelay chillerRelay(RELAY_CHILLER_PIN);
+ReefuinoRelay heaterRelay(RELAY_HEATER_PIN);
 ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep);
 
 //Stand temperature Sensor
-TemperatureSensor standTemperatureSensor(Temp2Pin);
+TemperatureSensor standTemperatureSensor(STAND_TEMP_SENSOR_PIN);
 
 //ATO
 ReefuinoRelay atoPumpRelay(ATOPumpPin);
 ATO ato(ATOPin, atoPumpRelay);
 
 //Others
-Buzzer buzzer(BuzzerPin);
+Buzzer buzzer(BUZZER_PIN);
 Logger logger;
+
+//Real time clock
+Chronodot RTC;
 
 void setup() {
   Serial.begin(115200);
@@ -53,17 +60,19 @@ void setup() {
 }
 
 void loop() {
-  double temp = thermostat.checkTemperature(); 
-  double standTemp = standTemperatureSensor.readCelsius();
+  DateTime now = RTC.now();
+  
+  float temp = thermostat.checkTemperature(); 
+  float standTemp = standTemperatureSensor.readCelsius();
 
-  char msg[12] = "Water: ";
-  dtostrf(temp, 2, 2, msg);
+  Serial.print("Water: ");
+  Serial.println(temp, 1);
 
-  char standMsg[12] = "Stand: ";
-  dtostrf(standTemp, 2, 2, standMsg);
+  Serial.print("Stand: ");
+  Serial.println(standTemp, 1);
 
-  logger.debug(msg);
-  logger.debug(standMsg);
+//  logger.debug(msg);
+//  logger.debug(standMsg);
 
   if(thermostat.isHeating()){
 
