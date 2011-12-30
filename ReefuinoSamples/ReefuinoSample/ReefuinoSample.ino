@@ -1,15 +1,17 @@
 #include <math.h>
-#include <Chronodot.h>
+
 #include <TemperatureSensor.h>
 #include <ReefuinoRelay.h>
 #include <Relay.h>
-#include <Wire.h>
 #include <ReefuinoThermostat.h>
 #include <Buzzer.h>
 #include <Logger.h>
 #include <ATO.h>
 #include<stdlib.h>
 
+#include <Wire.h>
+#include "Chronodot.h"
+  
 //class Chronodot;
 //class DateTime;
 
@@ -19,29 +21,30 @@
 #define RELAY_HEATER_PIN 8 //digital
 #define BUZZER_PIN 11 //digital
 
-#define ATOPin 12 //digital
-#define ATOPumpPin 10 //digital
+#define ATO_SENSOR_PIN 12 //digital
+#define ATO_PUMP_PIN 10 //digital
 
 //Water Temperature control
 double temperatureToKeep = 26.0;
 TemperatureSensor waterTemperatureSensor(WATER_TEMP_SENSOR_PIN);
 ReefuinoRelay chillerRelay(RELAY_CHILLER_PIN);
 ReefuinoRelay heaterRelay(RELAY_HEATER_PIN);
-ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep);
+
+//Real time clock
+Chronodot RTC;
+
+ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep, RTC);
 
 //Stand temperature Sensor
 TemperatureSensor standTemperatureSensor(STAND_TEMP_SENSOR_PIN);
 
 //ATO
-ReefuinoRelay atoPumpRelay(ATOPumpPin);
-ATO ato(ATOPin, atoPumpRelay);
+ReefuinoRelay atoPumpRelay(ATO_PUMP_PIN);
+ATO ato(ATO_SENSOR_PIN, atoPumpRelay);
 
 //Others
 Buzzer buzzer(BUZZER_PIN);
 Logger logger;
-
-//Real time clock
-Chronodot RTC;
 
 void setup() {
   Serial.begin(115200);

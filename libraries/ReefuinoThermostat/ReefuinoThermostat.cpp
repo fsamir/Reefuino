@@ -7,42 +7,53 @@ double harmfullFactor = 1.5;
 
 bool isOn = false;
 
-//ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep, Chronodot rtc)
-// :_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(heaterRelay), clock(rtc) {
-//}
+//Chronodot clock;
 
-ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep)
- :_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(heaterRelay) {
+ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
+		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
+		double temperatureToKeep, Chronodot rtc) :
+		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
+				chillerRelay), _heaterRelay(heaterRelay), clock(clock) {
+}
+
+ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
+		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
+		double temperatureToKeep) :
+		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
+				chillerRelay), _heaterRelay(heaterRelay) {
 }
 
 //<<destructor>>
-ReefuinoThermostat::~ReefuinoThermostat(){/*nothing to destruct*/
+ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 }
 
-float ReefuinoThermostat::checkTemperature(){
-  float temp = _temperatureSensor.readCelsius();       // read ADC and  convert it to Celsius
-  if(temp >= (_tempToKeep + actionBuffer)){
-        _chillerRelay.turnOn();
-//        lastTimeChillerOn = clock.now();
-  }
-  if(temp <= _tempToKeep) {
-    	_chillerRelay.turnOff();		
-  }
-  if(temp < (_tempToKeep - actionBuffer)) {
-    	_heaterRelay.turnOn();
-  }
-  if(temp >= _tempToKeep){
-    	_heaterRelay.turnOff();
-  }
-  return temp;
+float ReefuinoThermostat::checkTemperature() {
+	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
+	if (temp >= (_tempToKeep + actionBuffer)) {
+		if (lastTimeChillerOn == NULL || lastTimeChillerOn) {
+			_chillerRelay.turnOn();
+			lastTimeChillerOn = clock.now();
+		}
+	}
+	if (temp <= _tempToKeep) {
+		_chillerRelay.turnOff();
+	}
+	if (temp < (_tempToKeep - actionBuffer)) {
+		_heaterRelay.turnOn();
+	}
+	if (temp >= _tempToKeep) {
+		_heaterRelay.turnOff();
+	}
+	return temp;
 }
 
 /*Is the temperature dangerously high or low? */
 bool ReefuinoThermostat::isHarmfulTemperature() {
 	double temp = _temperatureSensor.readCelsius();
-	if(temp >= _tempToKeep + harmfullFactor	|| temp <= _tempToKeep - harmfullFactor){
+	if (temp >= _tempToKeep + harmfullFactor
+			|| temp <= _tempToKeep - harmfullFactor) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
@@ -54,7 +65,4 @@ bool ReefuinoThermostat::isHeating() {
 bool ReefuinoThermostat::isChilling() {
 	return _chillerRelay.isOn();
 }
-
-
-
 

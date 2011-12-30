@@ -10,13 +10,18 @@
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
-class Chronodot;
+#include <Chronodot.h>
+
+//class Chronodot;
 class DateTime;
 
 class ReefuinoThermostat {
 public:
-	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,			ReefuinoRelay heaterRelay, double temperatureToKeep);
-//	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay, double temperatureToKeep, Chronodot rtc);
+	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,
+			ReefuinoRelay heaterRelay, double temperatureToKeep);
+	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,
+			ReefuinoRelay heaterRelay, double temperatureToKeep,
+			Chronodot clock);
 	~ReefuinoThermostat();
 	float checkTemperature();
 	bool isHarmfulTemperature();
@@ -29,6 +34,6 @@ private:
 	TemperatureSensor _temperatureSensor;
 	double _tempToKeep;
 	DateTime* lastTimeChillerOn;
-//	Chronodot clock;
+	Chronodot clock;
 };
 #endif
