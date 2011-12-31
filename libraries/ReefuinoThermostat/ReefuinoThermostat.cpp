@@ -30,10 +30,11 @@ ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
 	if (temp >= (_tempToKeep + actionBuffer)) {
-		if (lastTimeChillerOn == NULL || lastTimeChillerOn) {
-			_chillerRelay.turnOn();
-			lastTimeChillerOn = clock.now();
-		}
+		_chillerRelay.turnOn();
+//		if (lastTimeChillerOn == NULL || lastTimeChillerOn) {
+//			_chillerRelay.turnOn();
+//			lastTimeChillerOn = clock.now();
+//		}
 	}
 	if (temp <= _tempToKeep) {
 		_chillerRelay.turnOff();

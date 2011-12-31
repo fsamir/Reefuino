@@ -33,7 +33,7 @@ private:
 	ReefuinoRelay _heaterRelay;
 	TemperatureSensor _temperatureSensor;
 	double _tempToKeep;
-	DateTime* lastTimeChillerOn;
+	DateTime lastTimeChillerOn;
 	Chronodot clock;
 };
 #endif
