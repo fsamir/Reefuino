@@ -10,7 +10,10 @@
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
-#include <Chronodot.h>
+//#include <Chronodot.h>
+
+#include "Time.h"
+#include "TimeAlarms.h"
 
 //class Chronodot;
 class DateTime;

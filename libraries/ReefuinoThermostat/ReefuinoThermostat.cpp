@@ -1,6 +1,8 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
+#include "Time.h"
+#include "TimeAlarms.h"
 
 double actionBuffer = 0.5;
 double harmfullFactor = 1.5;
@@ -30,7 +32,10 @@ ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
 	if (temp >= (_tempToKeep + actionBuffer)) {
-		_chillerRelay.turnOn();
+
+		Alarm.timerOnce(10, _chillerRelay.turnOn());	    // called once after 10 seconds
+//		_chillerRelay.turnOn();
+
 //		if (lastTimeChillerOn == NULL || lastTimeChillerOn) {
 //			_chillerRelay.turnOn();
 //			lastTimeChillerOn = clock.now();
@@ -51,8 +56,7 @@ float ReefuinoThermostat::checkTemperature() {
 /*Is the temperature dangerously high or low? */
 bool ReefuinoThermostat::isHarmfulTemperature() {
 	double temp = _temperatureSensor.readCelsius();
-	if (temp >= _tempToKeep + harmfullFactor
-			|| temp <= _tempToKeep - harmfullFactor) {
+	if (temp >= _tempToKeep + harmfullFactor || temp <= _tempToKeep - harmfullFactor) {
 		return true;
 	} else {
 		return false;
