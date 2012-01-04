@@ -10,7 +10,7 @@
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
-//#include <Chronodot.h>
+#include <Chronodot.h>
 
 #include "Time.h"
 #include "TimeAlarms.h"
@@ -30,6 +30,8 @@ public:
 	bool isHarmfulTemperature();
 	bool isHeating();
 	bool isChilling();
+	void ChillerOn();
+	void OnTimer(AlarmID_t Sender);
 
 private:
 	ReefuinoRelay _chillerRelay;
@@ -38,5 +40,6 @@ private:
 	double _tempToKeep;
 	DateTime lastTimeChillerOn;
 	Chronodot clock;
+
 };
 #endif
