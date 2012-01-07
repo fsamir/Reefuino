@@ -22,6 +22,7 @@ ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		double temperatureToKeep, Chronodot rtc) :
 		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
 				chillerRelay), _heaterRelay(heaterRelay), clock(clock) {
+	status = RESTING;
 }
 
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
@@ -29,7 +30,7 @@ ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		double temperatureToKeep) :
 		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
 				chillerRelay), _heaterRelay(heaterRelay) {
-
+	status = RESTING;
 }
 
 //<<destructor>>
@@ -44,27 +45,30 @@ float ReefuinoThermostat::checkTemperature() {
 		isWaitingForCooldown = false;
 	} else {
 		isWaitingForCooldown = true;
+		status = COOLINGDOWN;
 	}
 	if (temp >= (_tempToKeep + actionBuffer)) {
 		if (!isWaitingForCooldown) {
 			_chillerRelay.turnOn();
+			status = CHILLING;
 		}
 	}
 	if (temp <= _tempToKeep) {
 		if (!isWaitingForCooldown) {
 			_chillerRelay.turnOff();
+			status = RESTING;
 		}
-
 	}
 	if (temp < (_tempToKeep - actionBuffer)) {
 		if (!isWaitingForCooldown) {
 			_heaterRelay.turnOn();
+			status = HEATING;
 		}
-
 	}
 	if (temp >= _tempToKeep) {
 		if (!isWaitingForCooldown) {
 			_heaterRelay.turnOff();
+			status = RESTING;
 		}
 	}
 
@@ -94,8 +98,46 @@ bool ReefuinoThermostat::isChilling() {
 void ReefuinoThermostat::ChillerOn() {
 	_chillerRelay.turnOn();
 }
+ThermostatStatus ReefuinoThermostat::getStatus() {
+	status;
+}
+
+String ReefuinoThermostat::getStatusStr() {
+//	return stringify( status );
+
+//	string toString(Planet planet)
+//	{
+//	static string lookup[] = { "Mercury", "Venus", /*...*/, "Neptune" }
+		return lookup[status];
+
+//	char* result[];
+//
+//	const char* enMyErrorValueNames[] =
+//	  {
+//	  stringify( ERROR_INVALIDINPUT ),
+//	  stringify( ERROR_NULLINPUT ),
+//	  stringify( ERROR_INPUTTOOMUCH ),
+//	  stringify( ERROR_IAMBUSY )
+//	  };
+//	switch (status) {
+//	case (ThermostatStatus) HEATING:
+//			result = "heating";
+//		break;
+//	case (ThermostatStatus) RESTING:
+//			result = "resting";
+//		break;
+//	case (ThermostatStatus) CHILLING:
+//			result = "chilling";
+//		break;
+//	case (ThermostatStatus) COOLINGDOWN:
+//			result = "cooling down";
+//		break;
+//	}
+//	return result;
+}
 
 void OnTimer(AlarmID_t Sender) {
 // add code here to execute when the timer triggers
 	Serial.println("timer triggered");
 }
+

@@ -17,6 +17,10 @@
 
 //class Chronodot;
 class DateTime;
+enum ThermostatStatus {
+	CHILLING = 0, HEATING = 1, COOLINGDOWN = 2, RESTING = 3
+};
+static String lookup[] = { "CHILLING", "HEATING", "COOLINGDOWN", "RESTING" };
 
 class ReefuinoThermostat {
 public:
@@ -32,6 +36,8 @@ public:
 	bool isChilling();
 	void ChillerOn();
 	void OnTimer(AlarmID_t Sender);
+	ThermostatStatus getStatus();
+	String getStatusStr();
 
 private:
 	ReefuinoRelay _chillerRelay;
@@ -40,6 +46,7 @@ private:
 	double _tempToKeep;
 	DateTime lastTimeChillerOn;
 	Chronodot clock;
+	ThermostatStatus status;
 
 };
 #endif
