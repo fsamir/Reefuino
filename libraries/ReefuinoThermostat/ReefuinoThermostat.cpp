@@ -11,7 +11,8 @@ bool isOn = false;
 
 //Simple timmer
 //http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1233872134/all
-static unsigned long DELAY = 60000L; //1min
+//static unsigned long DELAY = 60000L; //1min
+static unsigned long DELAY = 6000L; //6 seconds
 unsigned long nextSwitchTime = millis() + DELAY;
 bool isWaitingForCooldown = false;
 
@@ -40,10 +41,16 @@ ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
 	//Check whether it should wait or the cooldown period has expired
+	Serial.print("nextSwitchTime: ");
+	Serial.println(nextSwitchTime);
+
+	Serial.print("milis: ");
+	Serial.println(millis());
+
 	if (nextSwitchTime < millis()) {
-		nextSwitchTime = millis() + DELAY;
-		isWaitingForCooldown = false;
+		resetCooldown();
 	} else {
+		Serial.println("activating cooldown");
 		isWaitingForCooldown = true;
 		status = COOLINGDOWN;
 	}
@@ -51,24 +58,32 @@ float ReefuinoThermostat::checkTemperature() {
 		if (!isWaitingForCooldown) {
 			_chillerRelay.turnOn();
 			status = CHILLING;
+		}else{
+			Serial.println("hot but waiting");
 		}
 	}
 	if (temp <= _tempToKeep) {
-		if (!isWaitingForCooldown) {
+		if (_chillerRelay.isOn() && !isWaitingForCooldown) {
 			_chillerRelay.turnOff();
 			status = RESTING;
+		}else{
+			Serial.println("not hot but waiting");
 		}
 	}
 	if (temp < (_tempToKeep - actionBuffer)) {
 		if (!isWaitingForCooldown) {
 			_heaterRelay.turnOn();
 			status = HEATING;
+		}else{
+			Serial.println("cold but waiting");
 		}
 	}
 	if (temp >= _tempToKeep) {
 		if (!isWaitingForCooldown) {
 			_heaterRelay.turnOff();
 			status = RESTING;
+		}else{
+			Serial.println("resting but waiting");
 		}
 	}
 
@@ -103,41 +118,11 @@ ThermostatStatus ReefuinoThermostat::getStatus() {
 }
 
 String ReefuinoThermostat::getStatusStr() {
-//	return stringify( status );
-
-//	string toString(Planet planet)
-//	{
-//	static string lookup[] = { "Mercury", "Venus", /*...*/, "Neptune" }
-		return lookup[status];
-
-//	char* result[];
-//
-//	const char* enMyErrorValueNames[] =
-//	  {
-//	  stringify( ERROR_INVALIDINPUT ),
-//	  stringify( ERROR_NULLINPUT ),
-//	  stringify( ERROR_INPUTTOOMUCH ),
-//	  stringify( ERROR_IAMBUSY )
-//	  };
-//	switch (status) {
-//	case (ThermostatStatus) HEATING:
-//			result = "heating";
-//		break;
-//	case (ThermostatStatus) RESTING:
-//			result = "resting";
-//		break;
-//	case (ThermostatStatus) CHILLING:
-//			result = "chilling";
-//		break;
-//	case (ThermostatStatus) COOLINGDOWN:
-//			result = "cooling down";
-//		break;
-//	}
-//	return result;
+	return lookup[status];
 }
 
-void OnTimer(AlarmID_t Sender) {
-// add code here to execute when the timer triggers
-	Serial.println("timer triggered");
+void ReefuinoThermostat::resetCooldown() {
+	Serial.println("resetting cooldown");
+	nextSwitchTime = millis() + DELAY;
+	isWaitingForCooldown = false;
 }
-

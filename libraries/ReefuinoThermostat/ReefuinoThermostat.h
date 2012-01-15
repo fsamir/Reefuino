@@ -14,6 +14,7 @@
 
 #include "Time.h"
 #include "TimeAlarms.h"
+#include "Logger.h"
 
 //class Chronodot;
 class DateTime;
@@ -35,7 +36,6 @@ public:
 	bool isHeating();
 	bool isChilling();
 	void ChillerOn();
-	void OnTimer(AlarmID_t Sender);
 	ThermostatStatus getStatus();
 	String getStatusStr();
 
@@ -47,6 +47,7 @@ private:
 	DateTime lastTimeChillerOn;
 	Chronodot clock;
 	ThermostatStatus status;
+	void resetCooldown();
 
 };
 #endif

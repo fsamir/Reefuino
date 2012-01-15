@@ -11,7 +11,7 @@
 
 #include <Wire.h>
 #include "Chronodot.h"
-  
+
 //class Chronodot;
 //class DateTime;
 
@@ -64,7 +64,7 @@ void setup() {
 
 void loop() {
   DateTime now = RTC.now();
-  
+
   float temp = thermostat.checkTemperature(); 
   float standTemp = standTemperatureSensor.readCelsius();
 
@@ -74,8 +74,8 @@ void loop() {
   Serial.print("Stand: ");
   Serial.println(standTemp, 1);
 
-//  logger.debug(msg);
-//  logger.debug(standMsg);
+  //  logger.debug(msg);
+  //  logger.debug(standMsg);
 
   if(thermostat.isHeating()){
 
@@ -92,6 +92,7 @@ void loop() {
   }
   delay(3 * 1000); 
 }
+
 
 
 
