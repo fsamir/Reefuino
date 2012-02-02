@@ -15,7 +15,6 @@ public:
   void error(String msg);
   void init(int serialPort);
 
-
 private:
   int serialPort;
 };

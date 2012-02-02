@@ -1,7 +1,6 @@
 #include "Logger.h"
 
 Logger::Logger() {
-
 }
 
 //<<destructor>>

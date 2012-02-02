@@ -11,10 +11,10 @@ bool isOn = false;
 
 //Simple timmer
 //http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1233872134/all
-//static unsigned long DELAY = 60000L; //1min
-static unsigned long DELAY = 6000L; //6 seconds
-unsigned long nextSwitchTime = millis() + DELAY;
-bool isWaitingForCooldown = false;
+//static unsigned long ACTIVATION_DELAY = 60000L; //1min
+static unsigned long ACTIVATION_DELAY = 6000L; //6 seconds
+unsigned long nextActivationTime = millis() + ACTIVATION_DELAY;
+bool isDelayingActivation = false;
 
 //Chronodot clock;
 
@@ -41,21 +41,21 @@ ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
 	//Check whether it should wait or the cooldown period has expired
-	Serial.print("nextSwitchTime: ");
-	Serial.println(nextSwitchTime);
+	Serial.print("nextActivationTime: ");
+	Serial.println(nextActivationTime);
 
 	Serial.print("milis: ");
 	Serial.println(millis());
 
-	if (nextSwitchTime < millis()) {
+	if (nextActivationTime < millis()) {
 		resetCooldown();
 	} else {
 		Serial.println("activating cooldown");
-		isWaitingForCooldown = true;
+		isDelayingActivation = true;
 		status = COOLINGDOWN;
 	}
 	if (temp >= (_tempToKeep + actionBuffer)) {
-		if (!isWaitingForCooldown) {
+		if (!isDelayingActivation) {
 			_chillerRelay.turnOn();
 			status = CHILLING;
 		}else{
@@ -63,7 +63,7 @@ float ReefuinoThermostat::checkTemperature() {
 		}
 	}
 	if (temp <= _tempToKeep) {
-		if (_chillerRelay.isOn() && !isWaitingForCooldown) {
+		if (_chillerRelay.isOn() && !isDelayingActivation) {
 			_chillerRelay.turnOff();
 			status = RESTING;
 		}else{
@@ -71,7 +71,7 @@ float ReefuinoThermostat::checkTemperature() {
 		}
 	}
 	if (temp < (_tempToKeep - actionBuffer)) {
-		if (!isWaitingForCooldown) {
+		if (!isDelayingActivation) {
 			_heaterRelay.turnOn();
 			status = HEATING;
 		}else{
@@ -79,7 +79,7 @@ float ReefuinoThermostat::checkTemperature() {
 		}
 	}
 	if (temp >= _tempToKeep) {
-		if (!isWaitingForCooldown) {
+		if (!isDelayingActivation) {
 			_heaterRelay.turnOff();
 			status = RESTING;
 		}else{
@@ -94,8 +94,7 @@ float ReefuinoThermostat::checkTemperature() {
 /*Is the temperature dangerously high or low? */
 bool ReefuinoThermostat::isHarmfulTemperature() {
 	double temp = _temperatureSensor.readCelsius();
-	if (temp >= _tempToKeep + harmfullFactor
-			|| temp <= _tempToKeep - harmfullFactor) {
+	if (temp >= _tempToKeep + harmfullFactor || temp <= _tempToKeep - harmfullFactor) {
 		return true;
 	} else {
 		return false;
@@ -123,6 +122,6 @@ String ReefuinoThermostat::getStatusStr() {
 
 void ReefuinoThermostat::resetCooldown() {
 	Serial.println("resetting cooldown");
-	nextSwitchTime = millis() + DELAY;
-	isWaitingForCooldown = false;
+	nextActivationTime = millis() + ACTIVATION_DELAY;
+	isDelayingActivation = false;
 }
