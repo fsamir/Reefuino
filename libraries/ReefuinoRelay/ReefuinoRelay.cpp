@@ -1,22 +1,18 @@
 #include "ReefuinoRelay.h" 
 #undef double
 
-#include "Chronodot.h"
-
-Chronodot RTC;
-
 //<<destructor>>
 ReefuinoRelay::~ReefuinoRelay(){/*nothing to destruct*/
 }
 
-void ReefuinoRelay::on() {
-	Relay::on();
-	Serial.println("Relay " + String(_sensorPin) + " is on.");
+void ReefuinoRelay::turnOn() {
+	Relay::turnOn();
+//	Serial.println("Relay " + String(_sensorPin) + " is on.");
 }
 
-void ReefuinoRelay::off() {
-	Relay::off();
-	Serial.println("Relay " + String(_sensorPin) + " is off.");
+void ReefuinoRelay::turnOff() {
+	Relay::turnOff();
+//	Serial.println("Relay " + String(_sensorPin) + " is off.");
 }
 
 bool ReefuinoRelay::isOff() {
@@ -26,4 +22,3 @@ bool ReefuinoRelay::isOff() {
 bool ReefuinoRelay::isOn() {
 	return Relay::isOn();
 }
-

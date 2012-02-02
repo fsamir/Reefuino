@@ -13,9 +13,9 @@ ATO::~ATO(){/*nothing to destruct*/
 bool ATO::onLoop() {
 	int value = digitalRead(atoPin);
 	if(value == HIGH) {
-		pumpRelay.on();
+		pumpRelay.turnOn();
 	}else{
-		pumpRelay.off();
+		pumpRelay.turnOff();
 	}
 
 	return value;

@@ -11,10 +11,9 @@ class Logger {
 public:
   Logger();
   ~Logger();
-  void debug(String msg);
+  static void debug(String msg);
   void error(String msg);
   void init(int serialPort);
-
 
 private:
   int serialPort;

@@ -1,3 +1,6 @@
+#ifndef Chronodot_H
+#define Chronodot_H
+
 // Code by JeeLabs http://news.jeelabs.org/code/
 // Released to the public domain! Enjoy!
 //
@@ -53,3 +56,5 @@ public:
 protected:
     static long offset;
 };
+
+#endif

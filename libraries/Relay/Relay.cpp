@@ -10,12 +10,12 @@ Relay::Relay(int sensorPin) :_sensorPin(sensorPin) {
 Relay::~Relay() {/*nothing to destruct*/
 }
 
-void Relay::on() {
+void Relay::turnOn() {
 	digitalWrite(_sensorPin, HIGH);
 	isActive = true;
 }
 
-void Relay::off() {
+void Relay::turnOff() {
 	digitalWrite(_sensorPin, LOW);
 	isActive = false;
 }

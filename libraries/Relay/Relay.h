@@ -10,8 +10,8 @@ class Relay {
 public:
 	Relay(int sensorPin);
 	~Relay();
-	virtual void on();
-	virtual void off();
+	virtual void turnOn();
+	virtual void turnOff();
 	virtual bool isOn();
 	virtual bool isOff();
 

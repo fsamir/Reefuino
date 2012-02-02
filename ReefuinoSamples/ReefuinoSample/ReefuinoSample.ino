@@ -8,6 +8,7 @@
 #include <ATO.h>
 #include<stdlib.h>
 
+#include "Chronodot.h"
 
 #define WaterTemperatureSensorPin 0   // Analog Pin 
 #define Temp2Pin 1   // Analog Pin 

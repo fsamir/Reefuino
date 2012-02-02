@@ -30,16 +30,11 @@ void loop() {
   float temp = thermostat.checkTemperature(); 
   Serial.print("Celsius: "); 
   Serial.println(temp,1);
-<<<<<<< HEAD
-=======
-  
+
   float temp2 = secondary.readCelsius();
    Serial.println("");
   Serial.print("temp 2: "); 
   Serial.println(temp2,1);
-  
-  
->>>>>>> improved README
   
 //  if(thermostat.isHeating()){
 //    Serial.println("Heater is on");    
