@@ -35,6 +35,7 @@ void loop() {
    Serial.println("");
   Serial.print("temp 2: "); 
   Serial.println(temp2,1);
+
   
 //  if(thermostat.isHeating()){
 //    Serial.println("Heater is on");    
