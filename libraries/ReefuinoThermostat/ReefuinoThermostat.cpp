@@ -3,6 +3,7 @@
 #include "ReefuinoRelay.h"
 #include "Time.h"
 #include "TimeAlarms.h"
+#include "Logger.h"
 
 double actionBuffer = 0.5;
 double harmfullFactor = 1.5;
@@ -46,6 +47,11 @@ float ReefuinoThermostat::checkTemperature() {
 
 	Serial.print("milis: ");
 	Serial.println(millis());
+
+	Serial.print("more ");
+	long missingSeconds =  (nextActivationTime - millis()) /1000;
+	Serial.print(missingSeconds);
+	Serial.print("seconds to activate");
 
 	if (nextActivationTime < millis()) {
 		resetCooldown();

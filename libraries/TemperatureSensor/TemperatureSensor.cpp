@@ -34,8 +34,8 @@ float TemperatureSensor::_compute(int RawADC) {
 	Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp));
 	Temp = Temp - 273.15; // Convert Kelvin to Celsius
 
-	Serial.print("ADC: ");
-	Serial.print(RawADC);
+	// Serial.print("ADC: ");
+	// Serial.print(RawADC);
 //	Serial.print("/1024"); // Print out RAW ADC Number
 //	Serial.print(", vcc: ");
 //	Serial.print(vcc, 2);
