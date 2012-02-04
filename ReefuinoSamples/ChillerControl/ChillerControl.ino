@@ -40,18 +40,23 @@ void loop() {
   Serial.println(""+ thermostat.getStatusStr()); 
   //Serial.println(thermostat.getStatus()); 
 
-  Serial.print("Delay until next activation: ");
-  Serial.println(thermostat.getTimeRemainingForNextActivation(), 1);
-  
+  float next = thermostat.getSecondsRemainingForNextActivation();
+  Serial.print("\nDelay until next activation: ");
+  //  Serial.print((next - millis() )/1000, 1);
+  Serial.print(next, 1);
+  Serial.println(""); 
+
   Serial.print("Last action: ");
   long last = thermostat.getLastActivationTime();
   Serial.print((millis() - last)/1000, 1);
   Serial.println(" secs ago.");
-  
+
 
   Serial.println(""); 
   delay(1000 * 2); 
 }
+
+
 
 
 

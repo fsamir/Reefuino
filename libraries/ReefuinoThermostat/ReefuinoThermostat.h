@@ -42,7 +42,7 @@ public:
 	bool isChilling();
 	ThermostatStatus getStatus();
 	String getStatusStr();
-	float getTimeRemainingForNextActivation();
+	long getSecondsRemainingForNextActivation();
 	long getLastActivationTime();
 	bool isHarmfulTemperature();
 
@@ -54,7 +54,7 @@ private:
 //	DateTime lastTimeChillerOn;
 //	Chronodot clock;
 	ThermostatStatus status;
-	void resetActivationDelay();
+	void resetActivationTimmer();
 	void checkHarmfulOperationTime();
 	bool isWorkingTooLong();
 
