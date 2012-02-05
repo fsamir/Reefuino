@@ -1,18 +1,15 @@
 #include <ATO.h>
-#include <Logger.h>
-#include <ATO.h>
+#include <Relay.h>
 #include <ReefuinoRelay.h>
 
-#define ATOPin 12 
-#define ATOPumpPin 9 
+#define WATER_LVL_SENSOR_PIN 12 
+#define ATO_PUMP_RELAY_PIN 10
 
-Logger logger();
-ReefuinoRelay atoPumpRelay(ATOPumpPin);
-ATO ato(ATOPin, atoPumpRelay);
+ReefuinoRelay atoPumpRelay(ATO_PUMP_RELAY_PIN);
+ATO ato(WATER_LVL_SENSOR_PIN, atoPumpRelay);
 
 void setup() {
   Serial.begin(115200);
-  //logger.init(115200);
 }
 
 void loop() {

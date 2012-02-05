@@ -8,7 +8,7 @@ const double actionBuffer = 0.5;
 const double harmfullFactor = 1.5;
 
 //Time to wait before taking an actions. Prevents frequent stops and starts due to short temperature fluctuations.
-static unsigned long ACTIVATION_DELAY = 1000 * 60; //60 seconds
+const long ACTIVATION_DELAY = 60000; //60 seconds
 
 // Set a WARN status when the heater/chiller is operating for more than 2hs
 static unsigned long DANGEROUS_OP_TIME_IN_SEC = 60 * 60 * 2; //2hs
@@ -87,30 +87,13 @@ float ReefuinoThermostat::checkTemperature() {
 }
 
 void ReefuinoThermostat::resetActivationTimmer() {
-
 	lastActivationTime = millis();
-	nextActivationInMillis = (ACTIVATION_DELAY + millis());
-
-	Serial.print("XXX: resetting acttivation delay cooldown to: ");
-	Serial.println(nextActivationInMillis, DEC);
+	nextActivationInMillis = (long) millis() + ACTIVATION_DELAY;
 }
 
 long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
-//	Serial.print("\n nxt:");
-//	Serial.println(nextActivationInMillis);
-//	Serial.print("millis:");
-//	Serial.println(millis());
-//	if ((nextActivationInMillis - millis()) > 0) {
-//		Serial.print("math");
-//		return ((nextActivationInMillis - millis()) / 1000);
-//	} else {
-//		Serial.print("zero");
-//		return 0.0;
-//	}
-
-	if (nextActivationInMillis > millis()) {
-		long result = (nextActivationInMillis - millis()) / 1000;
-		return result;
+	if (nextActivationInMillis > (millis() + 1000)) {
+		long result = (nextActivationInMillis - millis(tun	return result;
 	} else {
 		return 0;
 	}
