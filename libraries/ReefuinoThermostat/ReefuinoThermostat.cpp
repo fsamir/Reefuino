@@ -1,9 +1,6 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
-#include "Time.h"
-#include "TimeAlarms.h"
-#include "Logger.h"
 
 double actionBuffer = 0.5;
 double harmfullFactor = 1.5;
@@ -17,15 +14,6 @@ static unsigned long ACTIVATION_DELAY = 6000L; //6 seconds
 unsigned long nextActivationTime = millis() + ACTIVATION_DELAY;
 bool isDelayingActivation = false;
 
-//Chronodot clock;
-
-ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
-		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
-		double temperatureToKeep, Chronodot rtc) :
-		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
-				chillerRelay), _heaterRelay(heaterRelay), clock(clock) {
-	status = RESTING;
-}
 
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
