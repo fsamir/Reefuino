@@ -5,7 +5,6 @@ ATO::ATO(int pin, ReefuinoRelay relay):atoPin(pin), pumpRelay(relay){
 	  pinMode(atoPin, INPUT);
 	  Serial.println("Startd ATO on pin: "+ atoPin);
 }
-
 //<<destructor>>
 ATO::~ATO(){/*nothing to destruct*/
 }
