@@ -1,20 +1,20 @@
 #include "ATO.h"
 
 //Schematics: http://www.arduino.cc/en/Tutorial/Button
-ATO::ATO(int pin, ReefuinoRelay relay):atoPin(pin), pumpRelay(relay){
-	  pinMode(atoPin, INPUT);
-	  Serial.println("Startd ATO on pin: "+ atoPin);
+ATO::ATO(int pin, ReefuinoRelay relay) :
+		atoPin(pin), pumpRelay(relay) {
+	pinMode(atoPin, INPUT);
+	Logger::debug("Started listening Water level sensor on digital pin: " + atoPin);
 }
 
-//<<destructor>>
-ATO::~ATO(){/*nothing to destruct*/
+ATO::~ATO() {
 }
 
 bool ATO::onLoop() {
 	int value = digitalRead(atoPin);
-	if(value == HIGH) {
+	if (value == HIGH) {
 		pumpRelay.turnOn();
-	}else{
+	} else {
 		pumpRelay.turnOff();
 	}
 
@@ -24,6 +24,4 @@ bool ATO::onLoop() {
 bool ATO::isTopping() {
 	return pumpRelay.isOn();
 }
-
-
 

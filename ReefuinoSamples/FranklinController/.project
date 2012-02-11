@@ -94,6 +94,16 @@
 			<locationURI>FranklinControllerBuzzer/Buzzer</locationURI>
 		</link>
 		<link>
+			<name>Logger</name>
+			<type>2</type>
+			<locationURI>FranklinControllerLogger/Logger</locationURI>
+		</link>
+		<link>
+			<name>ReefuinoConfig</name>
+			<type>2</type>
+			<locationURI>FranklinControllerReefuinoConfig/ReefuinoConfig</locationURI>
+		</link>
+		<link>
 			<name>ReefuinoRelay</name>
 			<type>2</type>
 			<locationURI>FranklinControllerReefuinoRelay/ReefuinoRelay</locationURI>
@@ -112,6 +122,11 @@
 			<name>TemperatureSensor</name>
 			<type>2</type>
 			<locationURI>FranklinControllerTemperatureSensor/TemperatureSensor</locationURI>
+		</link>
+		<link>
+			<name>Timer</name>
+			<type>2</type>
+			<locationURI>FranklinControllerTimer/Timer</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

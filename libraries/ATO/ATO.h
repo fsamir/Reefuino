@@ -8,6 +8,7 @@
 #endif
 
 #include "ReefuinoRelay.h"
+#include "Logger.h"
 
 class ATO {
 public:

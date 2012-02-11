@@ -43,6 +43,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/TemperatureSensor}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ATO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Buzzer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Logger}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoConfig}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Timer}&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.compiler.option.def.1485111403" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.compiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -69,6 +72,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/TemperatureSensor}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ATO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Buzzer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Logger}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoConfig}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Timer}&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.def.479432623" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.cppcompiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -132,13 +138,16 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Buzzer|ATO|TemperatureSensor|ReefuinoThermostat|ReefuinoRelay|Relay" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Timer|ReefuinoConfig|Logger|Buzzer|ATO|TemperatureSensor|ReefuinoThermostat|ReefuinoRelay|Relay" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Relay"/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoRelay"/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoThermostat"/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="TemperatureSensor"/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ATO"/>
 						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Buzzer"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Logger"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoConfig"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Timer"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

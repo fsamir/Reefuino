@@ -23,7 +23,6 @@ ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 	status = RESTING;
 }
 
-//<<destructor>>
 ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 }
 
