@@ -21,6 +21,9 @@ public:
 		Serial.begin(serialPort);
 		Serial.println("Started serial port: " + String(serialPort));
 	}
+	static void alert(String msg) {
+		Serial.println("[WARNING] " + msg);
+	}
 
 private:
 	static int serialPort;

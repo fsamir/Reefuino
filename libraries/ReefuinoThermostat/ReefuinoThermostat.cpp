@@ -1,26 +1,39 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
+//#include "Time.h"
+//#include "TimeAlarms.h"
 
-double actionBuffer = 0.5;
-double harmfullFactor = 1.5;
+const double actionBuffer = 0.5;
+const double harmfullFactor = 1.5;
 
-bool isOn = false;
+//Time to wait before taking an actions. Prevents frequent stops and starts due to short temperature fluctuations.
+const long ACTIVATION_DELAY = 60000; //60 seconds
 
-//Simple timmer
-//http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1233872134/all
-//static unsigned long ACTIVATION_DELAY = 60000L; //1min
-static unsigned long ACTIVATION_DELAY = 6000L; //6 seconds
-unsigned long nextActivationTime = millis() + ACTIVATION_DELAY;
-bool isDelayingActivation = false;
+// Set a WARN status when the heater/chiller is operating for more than 2hs
+static unsigned long DANGEROUS_OP_TIME_IN_SEC = 60 * 60 * 2; //2hs
 
+unsigned long nextActivationInMillis = 0;
+unsigned long lastActivationTime = 0;
+bool shouldDelayActivation = false;
+
+//Chronodot clock;
+//ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
+// ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
+// double temperatureToKeep, Chronodot rtc) :
+// _tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
+// chillerRelay), _heaterRelay(heaterRelay), clock(clock) {
+// status = RESTING;
+//}
 
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
 		double temperatureToKeep) :
 		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
 				chillerRelay), _heaterRelay(heaterRelay) {
+
 	status = RESTING;
+// nextActivationTime = millis() + ACTIVATION_DELAY;
 }
 
 ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
@@ -28,70 +41,97 @@ ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
 
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
-	//Check whether it should wait or the cooldown period has expired
-	Serial.print("nextActivationTime: ");
-	Serial.println(nextActivationTime);
 
-	Serial.print("milis: ");
-	Serial.println(millis());
-
-	Serial.print("more ");
-	long missingSeconds =  (nextActivationTime - millis()) /1000;
-	Serial.print(missingSeconds);
-	Serial.print("seconds to activate");
-
-	if (nextActivationTime < millis()) {
-		resetCooldown();
+	if (nextActivationInMillis > millis()) {
+		Serial.println("delaying activation. \n");
+		shouldDelayActivation = true;
 	} else {
-		Serial.println("activating cooldown");
-		isDelayingActivation = true;
-		status = COOLINGDOWN;
+		shouldDelayActivation = false;
 	}
+
 	if (temp >= (_tempToKeep + actionBuffer)) {
-		if (!isDelayingActivation) {
+		if (!shouldDelayActivation && status != CHILLING
+				&& status != CHILLING_WARN) {
 			_chillerRelay.turnOn();
+			_heaterRelay.turnOff();
 			status = CHILLING;
-		}else{
-			Serial.println("hot but waiting");
+			resetActivationTimmer();
+		} else {
+			Serial.println("hot but waiting.");
 		}
-	}
-	if (temp <= _tempToKeep) {
-		if (_chillerRelay.isOn() && !isDelayingActivation) {
-			_chillerRelay.turnOff();
-			status = RESTING;
-		}else{
-			Serial.println("not hot but waiting");
-		}
-	}
-	if (temp < (_tempToKeep - actionBuffer)) {
-		if (!isDelayingActivation) {
+
+	} else if (temp < (_tempToKeep - actionBuffer)) {
+		if (!shouldDelayActivation && status != HEATING
+				&& status != HEATING_WARN) {
 			_heaterRelay.turnOn();
+			_chillerRelay.turnOff();
 			status = HEATING;
-		}else{
-			Serial.println("cold but waiting");
+			resetActivationTimmer();
+		} else {
+			Serial.println("cold but waiting.");
 		}
-	}
-	if (temp >= _tempToKeep) {
-		if (!isDelayingActivation) {
+	} else if (temp <= _tempToKeep || temp >= _tempToKeep) {
+		if (!shouldDelayActivation && status != RESTING) {
+			_chillerRelay.turnOff();
 			_heaterRelay.turnOff();
 			status = RESTING;
-		}else{
-			Serial.println("resting but waiting");
+			resetActivationTimmer();
+		} else {
+			Serial.println("waiting to rest.");
 		}
 	}
+	checkHarmfulOperationTime();
 
-//	Alarm.delay(100);
 	return temp;
+}
+
+void ReefuinoThermostat::resetActivationTimmer() {
+	lastActivationTime = millis();
+	nextActivationInMillis = (long) millis() + ACTIVATION_DELAY;
+}
+
+long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
+	if (nextActivationInMillis > (millis() + 1000)) {
+		long result = (nextActivationInMillis - millis());
+		return result;
+	} else {
+		return 0;
+	}
+}
+
+/**
+ * Last time the thermostat activated either chiller or heater.
+ * In milliseconds
+ */
+long ReefuinoThermostat::getLastActivationTime() {
+	return lastActivationTime;
+}
+
+/**
+ * Check whether the chiller or heater are working for a long time.
+ * Can be used to prevent disasters due to broken equipment.
+ */
+void ReefuinoThermostat::checkHarmfulOperationTime() {
+	if (status == HEATING && isWorkingTooLong()) {
+		status = HEATING_WARN;
+	} else if (status == CHILLING && isWorkingTooLong()) {
+		status = CHILLING_WARN;
+	}
 }
 
 /*Is the temperature dangerously high or low? */
 bool ReefuinoThermostat::isHarmfulTemperature() {
 	double temp = _temperatureSensor.readCelsius();
-	if (temp >= _tempToKeep + harmfullFactor || temp <= _tempToKeep - harmfullFactor) {
+	if (temp >= _tempToKeep + harmfullFactor
+			|| temp <= _tempToKeep - harmfullFactor) {
 		return true;
 	} else {
 		return false;
 	}
+}
+
+bool ReefuinoThermostat::isWorkingTooLong() {
+	return ((millis() - lastActivationTime) / 1000) > DANGEROUS_OP_TIME_IN_SEC;
 }
 
 bool ReefuinoThermostat::isHeating() {
@@ -102,19 +142,11 @@ bool ReefuinoThermostat::isChilling() {
 	return _chillerRelay.isOn();
 }
 
-void ReefuinoThermostat::ChillerOn() {
-	_chillerRelay.turnOn();
-}
 ThermostatStatus ReefuinoThermostat::getStatus() {
-	status;
+	return status;
 }
 
 String ReefuinoThermostat::getStatusStr() {
 	return lookup[status];
 }
 
-void ReefuinoThermostat::resetCooldown() {
-	Serial.println("resetting cooldown");
-	nextActivationTime = millis() + ACTIVATION_DELAY;
-	isDelayingActivation = false;
-}

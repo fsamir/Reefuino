@@ -14,8 +14,10 @@ class ATO {
 public:
   ATO(int pin, ReefuinoRelay relay);
   ~ATO();
-  bool onLoop();
+  int onLoop();
   bool isTopping();
+  bool isOperatingProperly();
+  void checkSensorConnectivity();
 
 private:
   int atoPin;

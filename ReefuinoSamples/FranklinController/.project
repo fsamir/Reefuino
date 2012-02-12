@@ -124,6 +124,11 @@
 			<locationURI>FranklinControllerTemperatureSensor/TemperatureSensor</locationURI>
 		</link>
 		<link>
+			<name>Time</name>
+			<type>2</type>
+			<locationURI>FranklinControllerTime/Time</locationURI>
+		</link>
+		<link>
 			<name>Timer</name>
 			<type>2</type>
 			<locationURI>FranklinControllerTimer/Timer</locationURI>
