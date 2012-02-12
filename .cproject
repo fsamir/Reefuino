@@ -15,25 +15,20 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="it.baeyens.avreclipse.buildArtefactType.app" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=it.baeyens.avreclipse.buildArtefactType.app" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.configuration.app.release.980545052" name="Release" parent="it.baeyens.avreclipse.configuration.app.release" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
 				<configuration artifactName="${ProjName}" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.configuration.app.release.980545052" name="Release" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
 					<folderInfo id="it.baeyens.avreclipse.configuration.app.release.980545052." name="/" resourcePath="">
-						<toolChain errorParsers="" id="it.baeyens.avreclipse.toolchain.winavr.app.release.1541523839" name="AVR-GCC Toolchain" superClass="it.baeyens.avreclipse.toolchain.winavr.app.release">
 						<toolChain errorParsers="" id="it.baeyens.avreclipse.toolchain.winavr.app.release.1541523839" name="AVR-GCC Toolchain">
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.flash.app.release.1046730981" name="Generate HEX file for Flash memory" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.flash.app.release"/>
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.release.219589584" name="Generate HEX file for EEPROM" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.release" value="true" valueType="boolean"/>
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objdump.app.release.615307235" name="Generate Extended Listing (Source + generated Assembler)" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objdump.app.release" value="true" valueType="boolean"/>
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release.1878891254" name="Print Size" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release"/>
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release.1381992110" name="AVRDude" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release"/>
-							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="it.baeyens.avreclipse.targetplatform.winavr.app.release.231503348" name="AVR Cross-Target" superClass="it.baeyens.avreclipse.targetplatform.winavr.app.release"/>
-							<builder buildPath="${workspace_loc:/second eclipse test/Release}" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="it.baeyens.avreclipse.target.builder.winavr.app.release.2080468417" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" superClass="it.baeyens.avreclipse.target.builder.winavr.app.release">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="it.baeyens.avreclipse.targetplatform.winavr.app.release.231503348" name="AVR Cross-Target"/>
 							<builder buildPath="${workspace_loc:/second eclipse test/Release}" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="it.baeyens.avreclipse.target.builder.winavr.app.release.2080468417" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
 								</outputEntries>
 							</builder>
-							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GASErrorParser" id="it.baeyens.avreclipse.tool.assembler.winavr.app.release.2056035817" name="AVR Assembler" superClass="it.baeyens.avreclipse.tool.assembler.winavr.app.release">
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GASErrorParser" id="it.baeyens.avreclipse.tool.assembler.winavr.app.release.2056035817" name="AVR Assembler">
 								<option id="it.baeyens.avreclipse.assembler.option.debug.level.22469911" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.assembler.option.debug.level" value="it.baeyens.avreclipse.assembler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.asm.option.include.paths.1193182990" name="#include paths for preprocessor(-I)" superClass="it.baeyens.avreclipse.asm.option.include.paths" valueType="includePath">
@@ -41,10 +36,8 @@
 									<listOptionValue builtIn="false" value="/Users/usuario/projects/Reefuino/Reefuino/TemperatureSensor"/>
 									<listOptionValue builtIn="false" value="../Reefuino/Reefuino/Buzzer"/>
 								</option>
-								<inputType id="it.baeyens.avreclipse.tool.assembler.input.237159600" superClass="it.baeyens.avreclipse.tool.assembler.input"/>
 								<inputType id="it.baeyens.avreclipse.tool.assembler.input.237159600"/>
 							</tool>
-							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="it.baeyens.avreclipse.tool.compiler.winavr.app.release.1677379678" name="AVR Compiler" superClass="it.baeyens.avreclipse.tool.compiler.winavr.app.release">
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="it.baeyens.avreclipse.tool.compiler.winavr.app.release.1677379678" name="AVR Compiler">
 								<option id="it.baeyens.avreclipse.compiler.option.debug.level.1349471076" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.compiler.option.debug.level" value="it.baeyens.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.optimize.1229451333" name="Optimization Level" superClass="it.baeyens.avreclipse.compiler.option.optimize" value="it.baeyens.avreclipse.compiler.optimize.size" valueType="enumerated"/>
@@ -63,10 +56,8 @@
 								<option id="it.baeyens.avreclipse.compiler.option.language.ubitfields.10704290" name="bitfields are unsigned (-funsigned-bitfields)" superClass="it.baeyens.avreclipse.compiler.option.language.ubitfields" value="false" valueType="boolean"/>
 								<option id="it.baeyens.avreclipse.compiler.option.std.683877028" name="Language Standard" superClass="it.baeyens.avreclipse.compiler.option.std" value="it.baeyens.avreclipse.compiler.option.std.default" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.otherflags.138599099" name="Other flags" superClass="it.baeyens.avreclipse.compiler.option.otherflags" value="-g" valueType="string"/>
-								<inputType id="it.baeyens.avreclipse.compiler.winavr.input.472891441" name="C Source Files" superClass="it.baeyens.avreclipse.compiler.winavr.input"/>
 								<inputType id="it.baeyens.avreclipse.compiler.winavr.input.472891441" name="C Source Files"/>
 							</tool>
-							<tool command="avr-g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="it.baeyens.avreclipse.tool.cppcompiler.app.release.265767624" name="AVR C++ Compiler" superClass="it.baeyens.avreclipse.tool.cppcompiler.app.release">
 							<tool command="avr-g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="it.baeyens.avreclipse.tool.cppcompiler.app.release.265767624" name="AVR C++ Compiler">
 								<option id="it.baeyens.avreclipse.cppcompiler.option.debug.level.1244205041" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.cppcompiler.option.debug.level" value="it.baeyens.avreclipse.cppcompiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.optimize.718166427" name="Optimization Level" superClass="it.baeyens.avreclipse.cppcompiler.option.optimize" value="it.baeyens.avreclipse.cppcompiler.optimize.size" valueType="enumerated"/>
@@ -85,12 +76,8 @@
 								<option id="it.baeyens.avreclipse.cppcompiler.option.language.uchar.1159028291" name="char is unsigned (-funsigned-char)" superClass="it.baeyens.avreclipse.cppcompiler.option.language.uchar" value="false" valueType="boolean"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.language.ubitfields.1912413953" name="bitfields are unsigned (-funsigned-bitfields)" superClass="it.baeyens.avreclipse.cppcompiler.option.language.ubitfields" value="false" valueType="boolean"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.otherflags.840937360" name="Other flags" superClass="it.baeyens.avreclipse.cppcompiler.option.otherflags" value="-g" valueType="string"/>
-								<inputType id="it.baeyens.avreclipse.cppcompiler.input.1732456011" superClass="it.baeyens.avreclipse.cppcompiler.input"/>
 								<inputType id="it.baeyens.avreclipse.cppcompiler.input.1732456011"/>
 							</tool>
-							<tool id="it.baeyens.avreclipse.tool.linker.winavr.app.release.1782124606" name="AVR C Linker" superClass="it.baeyens.avreclipse.tool.linker.winavr.app.release"/>
-							<tool command="avr-gcc" commandLinePattern="${COMMAND} -Os -Wl,--gc-sections  ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT}  ${INPUTS} -lm" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751" name="AVR C++ Linker" superClass="it.baeyens.avreclipse.tool.cpplinker.app.release">
-								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs" valueType="libs"/>
 							<tool id="it.baeyens.avreclipse.tool.linker.winavr.app.release.1782124606" name="AVR C Linker"/>
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} -Os -Wl,--gc-sections  ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT}  ${INPUTS} -lm" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751" name="AVR C++ Linker">
 								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs"/>
@@ -98,18 +85,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_${AVRTARGETMCU}}/${ConfigName}&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.genmap.1519069921" name="Map Filename" superClass="it.baeyens.avreclipse.cpplinker.option.genmap" value="" valueType="string"/>
-								<inputType id="it.baeyens.avreclipse.tool.cpplinker.input.306845630" name="OBJ Files" superClass="it.baeyens.avreclipse.tool.cpplinker.input">
 								<inputType id="it.baeyens.avreclipse.tool.cpplinker.input.306845630" name="OBJ Files">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 							</tool>
-							<tool id="it.baeyens.avreclipse.tool.archiver.winavr.base.2145680251" name="AVR Archiver" superClass="it.baeyens.avreclipse.tool.archiver.winavr.base"/>
-							<tool command="-avr-objdump" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} &gt;${OUTPUT}" errorParsers="" id="it.baeyens.avreclipse.tool.objdump.winavr.app.release.382856739" name="AVR Create Extended Listing" superClass="it.baeyens.avreclipse.tool.objdump.winavr.app.release"/>
-							<tool command="-avr-objcopy" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} ${OUTPUT}" errorParsers="" id="it.baeyens.avreclipse.tool.objcopy.flash.winavr.app.release.696142376" name="AVR Create Flash image" superClass="it.baeyens.avreclipse.tool.objcopy.flash.winavr.app.release"/>
-							<tool command="-avr-objcopy" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} ${OUTPUT}" errorParsers="" id="it.baeyens.avreclipse.tool.objcopy.eeprom.winavr.app.release.1178986446" name="AVR Create EEPROM image" superClass="it.baeyens.avreclipse.tool.objcopy.eeprom.winavr.app.release"/>
-							<tool command="-avr-size" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS}" errorParsers="" id="it.baeyens.avreclipse.tool.size.winavr.app.release.456436652" name="Print Size" superClass="it.baeyens.avreclipse.tool.size.winavr.app.release"/>
-							<tool id="it.baeyens.avreclipse.tool.avrdude.app.release.165671477" name="AVRDude" superClass="it.baeyens.avreclipse.tool.avrdude.app.release"/>
 							<tool id="it.baeyens.avreclipse.tool.archiver.winavr.base.2145680251" name="AVR Archiver"/>
 							<tool command="-avr-objdump" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} &gt;${OUTPUT}" errorParsers="" id="it.baeyens.avreclipse.tool.objdump.winavr.app.release.382856739" name="AVR Create Extended Listing"/>
 							<tool command="-avr-objcopy" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} ${OUTPUT}" errorParsers="" id="it.baeyens.avreclipse.tool.objcopy.flash.winavr.app.release.696142376" name="AVR Create Flash image"/>
@@ -127,7 +107,6 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="second eclipse test.it.baeyens.avreclipse.project.winavr.elf_2.1.0.295587019" name="AVR Cross Target Application" projectType="it.baeyens.avreclipse.project.winavr.elf_2.1.0"/>
 		<project id="second eclipse test.it.baeyens.avreclipse.project.winavr.elf_2.1.0.295587019" name="AVR Cross Target Application"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
@@ -150,7 +129,6 @@
 		<buildTargets>
 			<target name="target" path="libraries/Log" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 				<buildCommand>make</buildCommand>
-				<buildArguments/>
 				<buildTarget>target</buildTarget>
 				<stopOnError>true</stopOnError>
 				<useDefaultCommand>true</useDefaultCommand>
