@@ -31,7 +31,7 @@ now();             // returns the current time as seconds since Jan 1 1970
 
 The time and date functions can take an optional parameter for the time. This prevents
 errors if the time rolls over between elements. For example, if a new minute begins
-between getting the minute and second, the values will be inconsistent. Using the 
+between getting the minute and second, the values will be inconsistent. Using the /Volumes/BURACO/Software/Mac/VMware Fusion 3.0 + Keygen/serial.rtf
 following functions eliminates this probglem 
   time_t t = now(); // store the current time in time variable t 
   hour(t);          // returns the hour for the given time t

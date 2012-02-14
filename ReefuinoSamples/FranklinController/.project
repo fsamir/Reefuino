@@ -3,7 +3,7 @@
 	<name>FranklinController</name>
 	<comment></comment>
 	<projects>
-		<project>Arduino_Nano_w__ATmega328</project>
+		<project>Arduino_NG_or_older_w__ATmega168</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

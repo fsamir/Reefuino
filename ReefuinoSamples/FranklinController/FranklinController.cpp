@@ -12,17 +12,11 @@ ATO ato(ATOPin, atoPumpRelay);
 
 void setup() {
 	Logger::init(9600);
-	pinMode(1, OUTPUT);
-
+	Logger::debug("Started listening Water level sensor on digital pin: " + ATOPin);
 }
 
 void loop() {
-
 	ato.checkSensorConnectivity();
-
-	if (!ato.isOperatingProperly()) {
-		Logger::alert("ATO sensor is not stable");
-	}
 
 	int atoValue = ato.onLoop();
 	Logger::debug("ATO: " + String(atoValue));

@@ -1,14 +1,16 @@
 #include "ATO.h"
 
 bool isOk = true;
-//Schematics: http://www.arduino.cc/en/Tutorial/Button
+//Schematics: http://www.arduino.cc/en/Tutorial/Button/
+//(ground) ----(10k ohm resistor) -----|----------(sensor)------------5V
+//                                     |
+//                               (digital pin)
 ATO::ATO(int pin, ReefuinoRelay relay) :
 		atoPin(pin), pumpRelay(relay) {
 	pinMode(atoPin, INPUT);
-	Logger::debug(
-			"Started listening Water level sensor on digital pin: " + atoPin);
 
-	checkSensorConnectivity();
+
+//	checkSensorConnectivity();
 }
 
 ATO::~ATO() {
@@ -28,7 +30,7 @@ void ATO::checkSensorConnectivity() {
 
 	if (swapCounter > 0) {
 		isOk = false;
-	}else{
+	} else {
 		isOk = true;
 	}
 }
