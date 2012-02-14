@@ -1,6 +1,7 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
+#include "Logger.h"
 
 const double actionBuffer = 0.5;
 const double harmfullFactor = 1.5;
@@ -19,19 +20,16 @@ bool shouldDelayActivation = false;
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
 		double temperatureToKeep) :
-		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
-
+		_temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(
+				heaterRelay), _tempToKeep(temperatureToKeep) {
 	status = RESTING;
 }
 
-ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
-}
 
 float ReefuinoThermostat::checkTemperature() {
 	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
 
 	if (nextActivationInMillis > millis()) {
-		Serial.println("delaying activation. \n");
 		shouldDelayActivation = true;
 	} else {
 		shouldDelayActivation = false;
@@ -45,7 +43,7 @@ float ReefuinoThermostat::checkTemperature() {
 			status = CHILLING;
 			resetActivationTimmer();
 		} else {
-			Serial.println("hot but waiting.");
+			Logger::debug("hot but waiting.");
 		}
 
 	} else if (temp < (_tempToKeep - actionBuffer)) {
@@ -56,7 +54,7 @@ float ReefuinoThermostat::checkTemperature() {
 			status = HEATING;
 			resetActivationTimmer();
 		} else {
-			Serial.println("cold but waiting.");
+			Logger::debug("cold but waiting.");
 		}
 	} else if (temp <= _tempToKeep || temp >= _tempToKeep) {
 		if (!shouldDelayActivation && status != RESTING) {
@@ -65,7 +63,7 @@ float ReefuinoThermostat::checkTemperature() {
 			status = RESTING;
 			resetActivationTimmer();
 		} else {
-			Serial.println("waiting to rest.");
+			Logger::debug("waiting to rest.");
 		}
 	}
 	checkHarmfulOperationTime();
@@ -87,65 +85,8 @@ long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
 	}
 }
 
-ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
-}
-
-float ReefuinoThermostat::checkTemperature() {
-	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
-
-	if (nextActivationInMillis > millis()) {
-		Serial.println("delaying activation. \n");
-		shouldDelayActivation = true;
-	} else {
-		shouldDelayActivation = false;
-	}
-	if (temp >= (_tempToKeep + actionBuffer)) {
-		if (!shouldDelayActivation && status != CHILLING
-				&& status != CHILLING_WARN) {
-			_chillerRelay.turnOn();
-			_heaterRelay.turnOff();
-			status = CHILLING;
-
-			resetActivationTimmer();
-		} else {
-			Serial.println("hot but waiting.");
-		}
-	} else if (temp < (_tempToKeep - actionBuffer)) {
-		if (!shouldDelayActivation && status != HEATING
-				&& status != HEATING_WARN) {
-			_heaterRelay.turnOn();
-			_chillerRelay.turnOff();
-			status = HEATING;
-
-			resetActivationTimmer();
-		} else {
-			Serial.println("cold but waiting.");
-		}
-	} else if (temp <= _tempToKeep || temp >= _tempToKeep) {
-		if (!shouldDelayActivation && status != RESTING) {
-			_chillerRelay.turnOff();
-			_heaterRelay.turnOff();
-			status = RESTING;
-			resetActivationTimmer();
-		} else {
-			Serial.println("waiting to rest.");
-		}
-	}
-	checkHarmfulOperationTime();
-	return temp;
-}
-
-void ReefuinoThermostat::resetActivationTimmer() {
-	lastActivationTime = millis();
-	nextActivationInMillis = (long) millis() + ACTIVATION_DELAY;
-}
-
-long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
-	if (nextActivationInMillis > (millis() + 1000)) {
-		long result = (nextActivationInMillis - millis(tun	return result;
-	} else {
-		return 0;
-	}
+bool ReefuinoThermostat::isWorkingTooLong() {
+	return ((millis() - lastActivationTime) / 1000) > DANGEROUS_OP_TIME_IN_SEC;
 }
 
 /**
@@ -177,10 +118,6 @@ bool ReefuinoThermostat::isHarmfulTemperature() {
 	} else {
 		return false;
 	}
-}
-
-bool ReefuinoThermostat::isWorkingTooLong() {
-	return ((millis() - lastActivationTime) / 1000) > DANGEROUS_OP_TIME_IN_SEC;
 }
 
 bool ReefuinoThermostat::isHeating() {

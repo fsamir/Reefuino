@@ -11,7 +11,6 @@
 #include <ReefuinoRelay.h>
 #include <TemperatureSensor.h>
 
-
 enum ThermostatStatus {
 	CHILLING = 0,
 	HEATING = 1,
@@ -22,36 +21,16 @@ enum ThermostatStatus {
 };
 
 static String lookup[] = { "CHILLING", "HEATING", "WAITING", "RESTING",
-"CHILLING_WARN", "HEATING_WARN" };
-
+		"CHILLING_WARN", "HEATING_WARN" };
 
 class ReefuinoThermostat {
 
 public:
 	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,
-	ReefuinoRelay heaterRelay, double temperatureToKeep);
-	~ReefuinoThermostat();
-	float checkTemperature();
-	bool isHeating();
-	bool isChilling();
-	ThermostatStatus getStatus();
-	String getStatusStr();
-	long getSecondsRemainingForNextActivation();
-	long getLastActivationTime();
-	bool isHarmfulTemperature();
-
-private:
-	ReefuinoRelay _chillerRelay;
-	ReefuinoRelay _heaterRelay;
-	TemperatureSensor _temperatureSensor;
-	double _tempToKeep;
-	ThermostatStatus status;
-	void resetActivationTimmer();
-	void checkHarmfulOperationTime();
-
-	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,
 			ReefuinoRelay heaterRelay, double temperatureToKeep);
-	~ReefuinoThermostat();
+
+	~ReefuinoThermostat() {
+	}
 	float checkTemperature();
 	bool isHeating();
 	bool isChilling();
@@ -61,6 +40,15 @@ private:
 	long getLastActivationTime();
 	bool isHarmfulTemperature();
 	bool isWorkingTooLong();
+
+private:
+	ReefuinoRelay _chillerRelay;
+	ReefuinoRelay _heaterRelay;
+	TemperatureSensor _temperatureSensor;
+	double _tempToKeep;
+	ThermostatStatus status;
+	void resetActivationTimmer();
+	void checkHarmfulOperationTime();
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "ATO.h"
 #include "ReefuinoRelay.h"
+#include "ReefuinoConfig.h"
 
 const int ATOPin = 11;
 const int ATOPumpPin = 9;

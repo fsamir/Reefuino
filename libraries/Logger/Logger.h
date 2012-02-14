@@ -24,11 +24,6 @@ public:
 	static void alert(String msg) {
 		Serial.println("[WARNING] " + msg);
 	}
-  Logger();
-  ~Logger();
-  static void debug(String msg);
-  void error(String msg);
-  void init(int serialPort);
 
 private:
 	static int serialPort;

@@ -5,10 +5,10 @@ bool isOk = true;
 //(ground) ----(10k ohm resistor) -----|----------(sensor)------------5V
 //                                     |
 //                               (digital pin)
+
 ATO::ATO(int pin, ReefuinoRelay relay) :
 		atoPin(pin), pumpRelay(relay) {
 	pinMode(atoPin, INPUT);
-
 
 //	checkSensorConnectivity();
 }

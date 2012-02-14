@@ -22,7 +22,7 @@ TemperatureSensor::~TemperatureSensor() {/*nothing to destruct*/
 }
 
 float TemperatureSensor::readCelsius() {
-	_compute(analogRead(_sensorPin));
+	return _compute(analogRead(_sensorPin));
 }
 
 float TemperatureSensor::_compute(int RawADC) {
