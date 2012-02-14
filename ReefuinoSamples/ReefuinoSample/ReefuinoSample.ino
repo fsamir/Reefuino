@@ -1,4 +1,5 @@
 #include <math.h>
+
 #include <TemperatureSensor.h>
 #include <ReefuinoRelay.h>
 #include <Relay.h>
@@ -8,34 +9,46 @@
 #include <ATO.h>
 #include<stdlib.h>
 
+<<<<<<< HEAD
 #include "Chronodot.h"
 
+=======
+#include <Wire.h>
+#include "Chronodot.h"
 
-#define WaterTemperatureSensorPin 0   // Analog Pin 
-#define Temp2Pin 1   // Analog Pin 
-#define RelayChillerPIN 9 //digital
-#define RelayHeaterPIN 8 //digital
-#define BuzzerPin 11 //digital
+//class Chronodot;
+//class DateTime;
+>>>>>>> f68da77b7face132760fd10a688becff89f8da9c
 
-#define ATOPin 12 //digital
-#define ATOPumpPin 10 //digital
+#define WATER_TEMP_SENSOR_PIN 0   // Analog Pin 
+#define STAND_TEMP_SENSOR_PIN 1   // Analog Pin 
+#define RELAY_CHILLER_PIN 9 //digital
+#define RELAY_HEATER_PIN 8 //digital
+#define BUZZER_PIN 11 //digital
+
+#define ATO_SENSOR_PIN 12 //digital
+#define ATO_PUMP_PIN 10 //digital
 
 //Water Temperature control
 double temperatureToKeep = 26.0;
-TemperatureSensor waterTemperatureSensor(WaterTemperatureSensorPin);
-ReefuinoRelay chillerRelay(RelayChillerPIN);
-ReefuinoRelay heaterRelay(RelayHeaterPIN);
-ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep);
+TemperatureSensor waterTemperatureSensor(WATER_TEMP_SENSOR_PIN);
+ReefuinoRelay chillerRelay(RELAY_CHILLER_PIN);
+ReefuinoRelay heaterRelay(RELAY_HEATER_PIN);
+
+//Real time clock
+Chronodot RTC;
+
+ReefuinoThermostat thermostat(waterTemperatureSensor, chillerRelay, heaterRelay, temperatureToKeep, RTC);
 
 //Stand temperature Sensor
-TemperatureSensor standTemperatureSensor(Temp2Pin);
+TemperatureSensor standTemperatureSensor(STAND_TEMP_SENSOR_PIN);
 
 //ATO
-ReefuinoRelay atoPumpRelay(ATOPumpPin);
-ATO ato(ATOPin, atoPumpRelay);
+ReefuinoRelay atoPumpRelay(ATO_PUMP_PIN);
+ATO ato(ATO_SENSOR_PIN, atoPumpRelay);
 
 //Others
-Buzzer buzzer(BuzzerPin);
+Buzzer buzzer(BUZZER_PIN);
 Logger logger;
 
 void setup() {
@@ -55,17 +68,19 @@ void setup() {
 }
 
 void loop() {
-  double temp = thermostat.checkTemperature(); 
-  double standTemp = standTemperatureSensor.readCelsius();
+  DateTime now = RTC.now();
 
-  char msg[12] = "Water: ";
-  dtostrf(temp, 2, 2, msg);
+  float temp = thermostat.checkTemperature(); 
+  float standTemp = standTemperatureSensor.readCelsius();
 
-  char standMsg[12] = "Stand: ";
-  dtostrf(standTemp, 2, 2, standMsg);
+  Serial.print("Water: ");
+  Serial.println(temp, 1);
 
-  logger.debug(msg);
-  logger.debug(standMsg);
+  Serial.print("Stand: ");
+  Serial.println(standTemp, 1);
+
+  //  logger.debug(msg);
+  //  logger.debug(standMsg);
 
   if(thermostat.isHeating()){
 
@@ -82,6 +97,7 @@ void loop() {
   }
   delay(3 * 1000); 
 }
+
 
 
 

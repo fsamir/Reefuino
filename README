@@ -1,16 +1,24 @@
 Reefuino is an Arduino Reef Aquarium controller.
 
-Its main aim is to build a controller with components that can be purchased off eBay, without requiring any special assembling or soldering.  
+ATTENTION: This set of libraries is still being tested and developed. 
+There isn't yet documentation covering the hardware schematics. This will be provided soon.
 
-It supports:
+The aim is to build an aquarium controller with components that can be purchased off eBay, without requiring any special assembling or soldering.
+
+Installing:
+1. Install Arduino's Time library: http://www.arduino.cc/playground/Code/Time  
+
+* Installing Arduino Libraries: http://www.arduino.cc/en/Hacking/Libraries
+
+Currently supported:
 - Temperature controller (Heater, chiller and fans).
 - Auto Top Off (ATO) with two sensors and one pump.
-- General relays
+- Relays
 - Buzzer for alarms
-
-To be added
-- LED dimming
-- pH
 - Real Time Clock (RTC) for timmer functionality.
+
+To be added:
+- LED dimming with PWM signal
+- pH monitoring
 - Internet monitoring
-- Sms alerts
+- Sms alerts via the web with http://Torpedeiro.com
