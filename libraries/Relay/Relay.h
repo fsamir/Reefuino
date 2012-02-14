@@ -1,10 +1,10 @@
 #ifndef Relay_H
 #define Relay_H
-//#if defined(ARDUINO) && ARDUINO >= 100
+#if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
-//#else
-//#include "WProgram.h"
-//#endif
+#else
+#include "WProgram.h"
+#endif
 
 class Relay {
 public:

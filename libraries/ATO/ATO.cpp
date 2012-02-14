@@ -13,8 +13,6 @@ ATO::ATO(int pin, ReefuinoRelay relay) :
 //	checkSensorConnectivity();
 }
 
-ATO::~ATO() {
-}
 /* Read the sensor 20 times and log an warning if the result is not always the same.*/
 void ATO::checkSensorConnectivity() {
 	int swapCounter = 0;

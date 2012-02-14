@@ -1,8 +1,6 @@
 #include "ReefuinoThermostat.h"
 #include "TemperatureSensor.h"
 #include "ReefuinoRelay.h"
-//#include "Time.h"
-//#include "TimeAlarms.h"
 
 const double actionBuffer = 0.5;
 const double harmfullFactor = 1.5;
@@ -15,25 +13,15 @@ static unsigned long DANGEROUS_OP_TIME_IN_SEC = 60 * 60 * 2; //2hs
 
 unsigned long nextActivationInMillis = 0;
 unsigned long lastActivationTime = 0;
-bool shouldDelayActivation = false;
 
-//Chronodot clock;
-//ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
-// ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
-// double temperatureToKeep, Chronodot rtc) :
-// _tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
-// chillerRelay), _heaterRelay(heaterRelay), clock(clock) {
-// status = RESTING;
-//}
+bool shouldDelayActivation = false;
 
 ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
 		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
 		double temperatureToKeep) :
 		_tempToKeep(temperatureToKeep), _temperatureSensor(ts), _chillerRelay(
-				chillerRelay), _heaterRelay(heaterRelay) {
 
 	status = RESTING;
-// nextActivationTime = millis() + ACTIVATION_DELAY;
 }
 
 ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
@@ -94,6 +82,67 @@ long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
 	if (nextActivationInMillis > (millis() + 1000)) {
 		long result = (nextActivationInMillis - millis());
 		return result;
+	} else {
+		return 0;
+	}
+}
+
+ReefuinoThermostat::~ReefuinoThermostat() {/*nothing to destruct*/
+}
+
+float ReefuinoThermostat::checkTemperature() {
+	float temp = _temperatureSensor.readCelsius(); // read ADC and  convert it to Celsius
+
+	if (nextActivationInMillis > millis()) {
+		Serial.println("delaying activation. \n");
+		shouldDelayActivation = true;
+	} else {
+		shouldDelayActivation = false;
+	}
+	if (temp >= (_tempToKeep + actionBuffer)) {
+		if (!shouldDelayActivation && status != CHILLING
+				&& status != CHILLING_WARN) {
+			_chillerRelay.turnOn();
+			_heaterRelay.turnOff();
+			status = CHILLING;
+
+			resetActivationTimmer();
+		} else {
+			Serial.println("hot but waiting.");
+		}
+	} else if (temp < (_tempToKeep - actionBuffer)) {
+		if (!shouldDelayActivation && status != HEATING
+				&& status != HEATING_WARN) {
+			_heaterRelay.turnOn();
+			_chillerRelay.turnOff();
+			status = HEATING;
+
+			resetActivationTimmer();
+		} else {
+			Serial.println("cold but waiting.");
+		}
+	} else if (temp <= _tempToKeep || temp >= _tempToKeep) {
+		if (!shouldDelayActivation && status != RESTING) {
+			_chillerRelay.turnOff();
+			_heaterRelay.turnOff();
+			status = RESTING;
+			resetActivationTimmer();
+		} else {
+			Serial.println("waiting to rest.");
+		}
+	}
+	checkHarmfulOperationTime();
+	return temp;
+}
+
+void ReefuinoThermostat::resetActivationTimmer() {
+	lastActivationTime = millis();
+	nextActivationInMillis = (long) millis() + ACTIVATION_DELAY;
+}
+
+long ReefuinoThermostat::getSecondsRemainingForNextActivation() {
+	if (nextActivationInMillis > (millis() + 1000)) {
+		long result = (nextActivationInMillis - millis(tun	return result;
 	} else {
 		return 0;
 	}
