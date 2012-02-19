@@ -1,9 +1,9 @@
 #include "FranklinController.h"
 #include "ATO.h"
 #include "Logger.h"
-#include "ReefuinoRelay.h"
-#include "TemperatureSensor.h"
-#include "ReefuinoThermostat.h"
+//#include "ReefuinoRelay.h"
+//#include "TemperatureSensor.h"
+//#include "ReefuinoThermostat.h"
 
 //ATO
 const int ATOPin = 11;
@@ -12,19 +12,18 @@ ReefuinoRelay atoPumpRelay(ATOPumpPin);
 ATO ato(ATOPin, atoPumpRelay);
 
 //Temperature
-double temperatureToKeep = 26.0;
-const int TEMPERATURE_SENSOR_PIN = 0; // Analog Pin 0
-const int CHILLER_RELAY_PIN = 9; //digital
-TemperatureSensor temperatureSensor(TEMPERATURE_SENSOR_PIN);
-ReefuinoRelay chillerRelay(CHILLER_RELAY_PIN);
-ReefuinoRelay heaterRelay(2);
-ReefuinoThermostat thermostat(temperatureSensor, chillerRelay, heaterRelay,
-		temperatureToKeep);
+//double temperatureToKeep = 26.0;
+//const int TEMPERATURE_SENSOR_PIN = 0; // Analog Pin 0
+//const int CHILLER_RELAY_PIN = 9; //digital
+//TemperatureSensor temperatureSensor(TEMPERATURE_SENSOR_PIN);
+//ReefuinoRelay chillerRelay(CHILLER_RELAY_PIN);
+//ReefuinoRelay heaterRelay(2);
+//ReefuinoThermostat thermostat(temperatureSensor, chillerRelay, heaterRelay,
+//		temperatureToKeep);
 
 void setup() {
 	Logger::init(9600);
-	Logger::debug(
-			"Started listening Water level sensor on digital pin: " + ATOPin);
+	Logger::debug("Listening Water level sensor on digital pin: " + ATOPin);
 }
 
 void loop() {
@@ -35,7 +34,7 @@ void loop() {
 	Logger::debug("is Topping: " + String(ato.isTopping()));
 
 	//Temperature
-	float temp = thermostat.checkTemperature();
+//	float temp = thermostat.checkTemperature();
 
 //	Logger::debug("Celsius: ");
 //	Logger::debugFloat(temp);
