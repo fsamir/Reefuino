@@ -2,15 +2,18 @@
 #define Logger_H
 
 #if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
+#include "Arduino.h"
 #else
-  #include "WProgram.h"
+#include "WProgram.h"
 #endif
 
-#include "ReefuinoConfig.h"
-
+#define LOG_ENABLED //Comment this out to disable logs.
 class Logger {
 public:
+	static void debugFloat(float msg) {
+		print("[DEBUG] ");
+		printFloat(msg);
+	}
 	static void debug(String msg) {
 		println("[DEBUG] " + msg);
 	}
@@ -27,9 +30,19 @@ public:
 
 private:
 	static int serialPort;
+	static void printFloat(float msg) {
+#ifdef LOG_ENABLED
+		Serial.println(msg,1);
+#endif
+	}
 	static void println(String msg) {
 #ifdef LOG_ENABLED
-		Serial.println( msg);
+		Serial.println(msg);
+#endif
+	}
+	static void print(String msg) {
+#ifdef LOG_ENABLED
+		Serial.print(msg);
 #endif
 	}
 };

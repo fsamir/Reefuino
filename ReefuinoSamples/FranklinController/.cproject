@@ -24,29 +24,41 @@
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release.1878891254" name="Print Size" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release"/>
 							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release.1381992110" name="AVRDude" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release"/>
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="it.baeyens.avreclipse.targetplatform.winavr.app.release.231503348" name="AVR Cross-Target" superClass="it.baeyens.avreclipse.targetplatform.winavr.app.release"/>
-							<builder buildPath="${workspace_loc:/second eclipse test/Release}" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="it.baeyens.avreclipse.target.builder.winavr.app.release.2080468417" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" superClass="it.baeyens.avreclipse.target.builder.winavr.app.release"/>
+							<builder buildPath="${workspace_loc:/second eclipse test/Release}" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="it.baeyens.avreclipse.target.builder.winavr.app.release.2080468417" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" superClass="it.baeyens.avreclipse.target.builder.winavr.app.release">
+								<outputEntries>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
+								</outputEntries>
+							</builder>
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} -x c++ ${INPUTS}" errorParsers="org.eclipse.cdt.core.GASErrorParser" id="it.baeyens.avreclipse.tool.assembler.winavr.app.release.2056035817" name="AVR Assembler" superClass="it.baeyens.avreclipse.tool.assembler.winavr.app.release">
 								<option id="it.baeyens.avreclipse.assembler.option.debug.level.22469911" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.assembler.option.debug.level" value="it.baeyens.avreclipse.assembler.option.debug.level.none" valueType="enumerated"/>
-								<option id="it.baeyens.avreclipse.asm.option.include.paths.1193182990" name="#include paths for preprocessor(-I)" superClass="it.baeyens.avreclipse.asm.option.include.paths"/>
+								<option id="it.baeyens.avreclipse.asm.option.include.paths.1193182990" name="#include paths for preprocessor(-I)" superClass="it.baeyens.avreclipse.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/arduino}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/standard}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Logger}&quot;"/>
+									<listOptionValue builtIn="false" value="../FranklinController/ReefuinoConfig"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Relay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoRelay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ATO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/TemperatureSensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoThermostat}&quot;"/>
+								</option>
 								<inputType id="it.baeyens.avreclipse.tool.assembler.input.237159600" superClass="it.baeyens.avreclipse.tool.assembler.input"/>
 							</tool>
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} -x c++ ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="it.baeyens.avreclipse.tool.compiler.winavr.app.release.1677379678" name="AVR Compiler" superClass="it.baeyens.avreclipse.tool.compiler.winavr.app.release">
 								<option id="it.baeyens.avreclipse.compiler.option.debug.level.1349471076" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.compiler.option.debug.level" value="it.baeyens.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.optimize.1229451333" name="Optimization Level" superClass="it.baeyens.avreclipse.compiler.option.optimize" value="it.baeyens.avreclipse.compiler.optimize.size" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.incpath.83382774" name="Include Paths (-I)" superClass="it.baeyens.avreclipse.compiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ARDUINOBOARDNAME}/arduino}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ARDUINOBOARDNAME}/${ARDUINOBOARDVARIANT}}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Relay}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoRelay}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoThermostat}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/TemperatureSensor}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ATO}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Buzzer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Logger}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoConfig}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Time}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/arduino}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/standard}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Logger}&quot;"/>
+									<listOptionValue builtIn="false" value="../FranklinController/ReefuinoConfig"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Relay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoRelay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ATO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/TemperatureSensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoThermostat}&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.compiler.option.def.1485111403" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.compiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -64,19 +76,16 @@
 								<option id="it.baeyens.avreclipse.cppcompiler.option.debug.level.1244205041" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.cppcompiler.option.debug.level" value="it.baeyens.avreclipse.cppcompiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.optimize.718166427" name="Optimization Level" superClass="it.baeyens.avreclipse.cppcompiler.option.optimize" value="it.baeyens.avreclipse.cppcompiler.optimize.size" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.incpath.404803734" name="Include Paths (-I)" superClass="it.baeyens.avreclipse.cppcompiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ARDUINOBOARDNAME}/arduino}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ARDUINOBOARDNAME}/${ARDUINOBOARDVARIANT}}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Relay}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoRelay}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoThermostat}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/TemperatureSensor}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ATO}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Buzzer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Logger}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/ReefuinoConfig}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Time}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/arduino}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/Arduino_NG_or_older_w__ATmega168/standard}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Logger}&quot;"/>
+									<listOptionValue builtIn="false" value="../FranklinController/ReefuinoConfig"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/Relay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoRelay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ATO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/TemperatureSensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FranklinController/FranklinController/ReefuinoThermostat}&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.def.479432623" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.cppcompiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -92,9 +101,7 @@
 							</tool>
 							<tool id="it.baeyens.avreclipse.tool.linker.winavr.app.release.1782124606" name="AVR C Linker" superClass="it.baeyens.avreclipse.tool.linker.winavr.app.release"/>
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} -Os -Wl,--gc-sections  ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -lm" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751" name="AVR C++ Linker" superClass="it.baeyens.avreclipse.tool.cpplinker.app.release">
-								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="&quot;${ARDUINOBOARDNAME}&quot;"/>
-								</option>
+								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs" valueType="libs"/>
 								<option id="it.baeyens.avreclipse.cpplinker.option.libpath.564686622" name="Libraries Path (-L)" superClass="it.baeyens.avreclipse.cpplinker.option.libpath" valueType="stringList">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ARDUINOBOARDNAME}}/${ConfigName}&quot;"/>
 								</option>
@@ -112,45 +119,14 @@
 							<tool id="it.baeyens.avreclipse.tool.avrdude.app.release.165671477" name="AVRDude" superClass="it.baeyens.avreclipse.tool.avrdude.app.release"/>
 						</toolChain>
 					</folderInfo>
-					<folderInfo id="it.baeyens.avreclipse.configuration.app.release.980545052.995683856" name="/" resourcePath="Relay">
-						<toolChain id="it.baeyens.avreclipse.toolchain.winavr.app.release.1633288523" name="AVR-GCC Toolchain" superClass="it.baeyens.avreclipse.toolchain.winavr.app.release" unusedChildren="">
-							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.flash.app.release.1046730981.810382998" name="Generate HEX file for Flash memory" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.flash.app.release.1046730981"/>
-							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.release.219589584.537377702" name="Generate HEX file for EEPROM" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.release.219589584"/>
-							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.objdump.app.release.615307235.715702509" name="Generate Extended Listing (Source + generated Assembler)" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.objdump.app.release.615307235"/>
-							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release.1878891254.1672472090" name="Print Size" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.size.app.release.1878891254"/>
-							<option id="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release.1381992110.665953990" name="AVRDude" superClass="it.baeyens.avreclipse.toolchain.options.toolchain.avrdude.app.release.1381992110"/>
-							<targetPlatform id="it.baeyens.avreclipse.targetplatform.winavr.app.release" name="AVR Cross-Target" superClass="it.baeyens.avreclipse.targetplatform.winavr.app.release"/>
-							<tool id="it.baeyens.avreclipse.tool.assembler.winavr.app.release.1592330214" name="AVR Assembler" superClass="it.baeyens.avreclipse.tool.assembler.winavr.app.release.2056035817">
-								<inputType id="it.baeyens.avreclipse.tool.assembler.input.1270291458" superClass="it.baeyens.avreclipse.tool.assembler.input"/>
-							</tool>
-							<tool id="it.baeyens.avreclipse.tool.compiler.winavr.app.release.1643174853" name="AVR Compiler" superClass="it.baeyens.avreclipse.tool.compiler.winavr.app.release.1677379678">
-								<inputType id="it.baeyens.avreclipse.compiler.winavr.input.1106860910" name="C Source Files" superClass="it.baeyens.avreclipse.compiler.winavr.input"/>
-							</tool>
-							<tool id="it.baeyens.avreclipse.tool.cppcompiler.app.release.1009532700" name="AVR C++ Compiler" superClass="it.baeyens.avreclipse.tool.cppcompiler.app.release.265767624">
-								<inputType id="it.baeyens.avreclipse.cppcompiler.input.20446110" superClass="it.baeyens.avreclipse.cppcompiler.input"/>
-							</tool>
-							<tool id="it.baeyens.avreclipse.tool.linker.winavr.app.release.1578722091" name="AVR C Linker" superClass="it.baeyens.avreclipse.tool.linker.winavr.app.release.1782124606"/>
-							<tool id="it.baeyens.avreclipse.tool.cpplinker.app.release.1363173282" name="AVR C++ Linker" superClass="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751"/>
-							<tool id="it.baeyens.avreclipse.tool.archiver.winavr.base.78577283" name="AVR Archiver" superClass="it.baeyens.avreclipse.tool.archiver.winavr.base.2145680251"/>
-							<tool id="it.baeyens.avreclipse.tool.objdump.winavr.app.release.391476480" name="AVR Create Extended Listing" superClass="it.baeyens.avreclipse.tool.objdump.winavr.app.release.382856739"/>
-							<tool id="it.baeyens.avreclipse.tool.objcopy.flash.winavr.app.release.342996917" name="AVR Create Flash image" superClass="it.baeyens.avreclipse.tool.objcopy.flash.winavr.app.release.696142376"/>
-							<tool id="it.baeyens.avreclipse.tool.objcopy.eeprom.winavr.app.release.1171341025" name="AVR Create EEPROM image" superClass="it.baeyens.avreclipse.tool.objcopy.eeprom.winavr.app.release.1178986446"/>
-							<tool id="it.baeyens.avreclipse.tool.size.winavr.app.release.1341283018" name="Print Size" superClass="it.baeyens.avreclipse.tool.size.winavr.app.release.456436652"/>
-							<tool id="it.baeyens.avreclipse.tool.avrdude.app.release.1425242634" name="AVRDude" superClass="it.baeyens.avreclipse.tool.avrdude.app.release.165671477"/>
-						</toolChain>
-					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Time|Timer|ReefuinoConfig|Logger|Buzzer|ATO|TemperatureSensor|ReefuinoThermostat|ReefuinoRelay|Relay" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Relay"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoRelay"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoThermostat"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="TemperatureSensor"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ATO"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Buzzer"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Logger"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="ReefuinoConfig"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Timer"/>
-						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Time"/>
+						<entry excluding="Relay|ReefuinoRelay|ATO|Logger|ReefuinoConfig|ReefuinoThermostat|TemperatureSensor" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Logger"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Relay"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ReefuinoRelay"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ATO"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TemperatureSensor"/>
+						<entry excluding="?xamples/*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ReefuinoThermostat"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -160,28 +136,21 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="second eclipse test.it.baeyens.avreclipse.project.winavr.elf_2.1.0.295587019" name="AVR Cross Target Application" projectType="it.baeyens.avreclipse.project.winavr.elf_2.1.0"/>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="1"/>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.995683856;it.baeyens.avreclipse.tool.cppcompiler.app.release.1009532700;it.baeyens.avreclipse.cppcompiler.input.20446110">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileCPP"/>
+		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.;it.baeyens.avreclipse.tool.cppcompiler.app.release.265767624;it.baeyens.avreclipse.cppcompiler.input.1732456011">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.;it.baeyens.avreclipse.tool.compiler.winavr.app.release.1677379678;it.baeyens.avreclipse.compiler.winavr.input.472891441">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.995683856;it.baeyens.avreclipse.tool.compiler.winavr.app.release.1643174853;it.baeyens.avreclipse.compiler.winavr.input.1106860910">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="it.baeyens.avreclipse.configuration.app.release.980545052;it.baeyens.avreclipse.configuration.app.release.980545052.995683856">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="it.baeyens.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/secondEclipseTest"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

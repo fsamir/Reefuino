@@ -7,11 +7,12 @@
 #include <ReefuinoThermostat.h>
 #include <Time.h>
 #include <TimeAlarms.h>
+#include <Logger.h>
 
 
 
-#define TEMPERATURE_SENSOR_PIN 0   // Analog Pin 0
-#define FAN_RELAY_PIN 9 //digital
+const int  TEMPERATURE_SENSOR_PIN = 0;   // Analog Pin 0
+const int  FAN_RELAY_PIN = 9; //digital
 
 double temperatureToKeep = 26.0;
 
@@ -38,7 +39,7 @@ void loop() {
 
   Serial.print("Thermostat is: ");
   Serial.println(thermostat.getStatusStr()); 
-  
+
   if(thermostat.isHeating()){
     Serial.println("Heater is on");    
   } 
@@ -50,6 +51,7 @@ void loop() {
   }
   delay(1000); 
 }
+
 
 
 
