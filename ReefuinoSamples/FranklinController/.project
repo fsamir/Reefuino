@@ -11,6 +11,10 @@
 			<triggers>clean,full,incremental,</triggers>
 			<arguments>
 				<dictionary>
+					<key>?children?</key>
+					<value>?name?=outputEntries\|?children?=?name?=entry\\\\\\\|\\\|\||</value>
+				</dictionary>
+				<dictionary>
 					<key>?name?</key>
 					<value></value>
 				</dictionary>
@@ -92,6 +96,11 @@
 			<name>Logger</name>
 			<type>2</type>
 			<locationURI>FranklinControllerLogger/Logger</locationURI>
+		</link>
+		<link>
+			<name>NTCTemperatureSensor</name>
+			<type>2</type>
+			<locationURI>FranklinControllerNTCTemperatureSensor/NTCTemperatureSensor</locationURI>
 		</link>
 		<link>
 			<name>ReefuinoRelay</name>

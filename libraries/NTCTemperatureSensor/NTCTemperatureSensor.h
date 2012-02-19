@@ -10,15 +10,16 @@
 #include <math.h>
 
 //Reference: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1260958614
-class TemperatureSensor {
+class NTCTemperatureSensor {
 public:
-	TemperatureSensor(int sensorPin);
-	~TemperatureSensor();
-	float readCelsius();
+	NTCTemperatureSensor(int sensorPin);
+	~NTCTemperatureSensor();
+	double readCelsius();
 
 private:
 	int _sensorPin;
-	float _compute(int RawADC);
+	double _compute(int RawADC);
+	double thermister(int RawADC);
 };
 
 #endif
