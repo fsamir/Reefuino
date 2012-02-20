@@ -98,9 +98,9 @@
 			<locationURI>FranklinControllerLogger/Logger</locationURI>
 		</link>
 		<link>
-			<name>NTCTemperatureSensor</name>
+			<name>OneWireTemperatureSensor</name>
 			<type>2</type>
-			<locationURI>FranklinControllerNTCTemperatureSensor/NTCTemperatureSensor</locationURI>
+			<locationURI>FranklinControllerOneWireTemperatureSensor/OneWireTemperatureSensor</locationURI>
 		</link>
 		<link>
 			<name>ReefuinoRelay</name>
