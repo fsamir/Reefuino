@@ -11,10 +11,6 @@
 			<triggers>clean,full,incremental,</triggers>
 			<arguments>
 				<dictionary>
-					<key>?children?</key>
-					<value>?name?=outputEntries\|?children?=?name?=entry\\\\\\\|\\\|\||</value>
-				</dictionary>
-				<dictionary>
 					<key>?name?</key>
 					<value></value>
 				</dictionary>
@@ -93,9 +89,19 @@
 			<locationURI>FranklinControllerATO/ATO</locationURI>
 		</link>
 		<link>
+			<name>DallasTemperatureControl</name>
+			<type>2</type>
+			<locationURI>FranklinControllerDallasTemperatureControl/DallasTemperatureControl</locationURI>
+		</link>
+		<link>
 			<name>Logger</name>
 			<type>2</type>
 			<locationURI>FranklinControllerLogger/Logger</locationURI>
+		</link>
+		<link>
+			<name>OneWire</name>
+			<type>2</type>
+			<locationURI>FranklinControllerOneWire/OneWire</locationURI>
 		</link>
 		<link>
 			<name>OneWireTemperatureSensor</name>
@@ -106,6 +112,11 @@
 			<name>ReefuinoRelay</name>
 			<type>2</type>
 			<locationURI>FranklinControllerReefuinoRelay/ReefuinoRelay</locationURI>
+		</link>
+		<link>
+			<name>ReefuinoThermostat</name>
+			<type>2</type>
+			<locationURI>FranklinControllerReefuinoThermostat/ReefuinoThermostat</locationURI>
 		</link>
 		<link>
 			<name>Relay</name>

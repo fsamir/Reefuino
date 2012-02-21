@@ -7,8 +7,9 @@
 #include "WProgram.h"
 #endif
 
-#include <OneWire.h>
-#include <DallasTemperature.h>
+#include "Logger.h"
+#include "OneWire.h"
+#include "DallasTemperature.h"
 
 class OneWireTemperatureSensor {
 public:
@@ -23,7 +24,6 @@ private:
 	float _compute(int RawADC);
 	OneWire oneWire;
 	DallasTemperature sensors;
-//	DeviceAddress insideThermometer, outsideThermometer;
 
 };
 

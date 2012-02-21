@@ -1,7 +1,7 @@
 #include "ReefuinoThermostat.h"
-#include "TemperatureSensor.h"
-#include "ReefuinoRelay.h"
 #include "Logger.h"
+#include "ReefuinoRelay.h"
+#include "OneWireTemperatureSensor.h"
 
 const double actionBuffer = 0.5;
 const double harmfullFactor = 1.5;
@@ -17,7 +17,7 @@ unsigned long lastActivationTime = 0;
 
 bool shouldDelayActivation = false;
 
-ReefuinoThermostat::ReefuinoThermostat(TemperatureSensor ts,
+ReefuinoThermostat::ReefuinoThermostat(OneWireTemperatureSensor ts,
 		ReefuinoRelay chillerRelay, ReefuinoRelay heaterRelay,
 		double temperatureToKeep) :
 		_temperatureSensor(ts), _chillerRelay(chillerRelay), _heaterRelay(

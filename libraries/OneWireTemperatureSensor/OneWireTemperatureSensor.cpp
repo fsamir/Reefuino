@@ -1,5 +1,9 @@
 #include "OneWireTemperatureSensor.h"
 
+//References
+//http://bildr.org/2011/07/ds18b20-arduino/
+//http://hackaday.com/2008/12/10/parts-1-wire-temperature-sensor-ds1822/
+
 OneWireTemperatureSensor::OneWireTemperatureSensor(int SensorPin) :
 		oneWire(SensorPin), sensors(&oneWire) {
 	_sensorPin = SensorPin;
@@ -9,29 +13,18 @@ OneWireTemperatureSensor::~OneWireTemperatureSensor() {
 }
 
 void OneWireTemperatureSensor::init() {
-	// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-//	oneWire(_sensorPin);
-
-// Pass our oneWire reference to Dallas Temperature.
-//	sensors(&oneWire);
-
-// arrays to hold device addresses
-//	insideThermometer, outsideThermometer;
-
 	sensors.begin();
 
 	// locate devices on the bus
-	Serial.print("Locating devices...");
-	Serial.print("Found ");
-	Serial.print(sensors.getDeviceCount(), DEC);
-	Serial.println(" devices.");
+	Logger::debug("Locating devices...");
+	Logger::debug("Found " + String(sensors.getDeviceCount()) + " devices");
 
-	// report parasite power requirements
-	Serial.print("Parasite power is: ");
+	//eport parasite power requirements
+	Logger::debug("Parasite power is: ");
 	if (sensors.isParasitePowerMode())
-		Serial.println("ON");
+		Logger::debug("ON");
 	else
-		Serial.println("OFF");
+		Logger::debug("OFF");
 
 }
 

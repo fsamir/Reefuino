@@ -14,9 +14,10 @@ public:
 		print("[DEBUG] ");
 		printFloat(msg);
 	}
+
 	static void debug(String msg) {
-		println("[DEBUG] " + msg);
-	}
+			println("[DEBUG] " + msg);
+		}
 	static void error(String msg) {
 		println("[ERROR] " + msg);
 	}

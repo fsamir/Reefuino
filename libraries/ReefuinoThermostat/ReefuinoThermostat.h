@@ -9,7 +9,7 @@
 #endif
 
 #include <ReefuinoRelay.h>
-#include <TemperatureSensor.h>
+#include <OneWireTemperatureSensor.h>
 
 enum ThermostatStatus {
 	CHILLING = 0,
@@ -26,7 +26,7 @@ static String lookup[] = { "CHILLING", "HEATING", "WAITING", "RESTING",
 class ReefuinoThermostat {
 
 public:
-	ReefuinoThermostat(TemperatureSensor ts, ReefuinoRelay chillerRelay,
+	ReefuinoThermostat(OneWireTemperatureSensor ts, ReefuinoRelay chillerRelay,
 			ReefuinoRelay heaterRelay, double temperatureToKeep);
 
 	~ReefuinoThermostat() {
@@ -44,7 +44,7 @@ public:
 private:
 	ReefuinoRelay _chillerRelay;
 	ReefuinoRelay _heaterRelay;
-	TemperatureSensor _temperatureSensor;
+	OneWireTemperatureSensor _temperatureSensor;
 	double _tempToKeep;
 	ThermostatStatus status;
 	void resetActivationTimmer();
